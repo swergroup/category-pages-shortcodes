@@ -15,7 +15,7 @@ Useful shortcodes to display a post or page content or a list of posts.
 Pages & Posts Shortcodes is a complete rewrite of the "Category Page" plugin.
 It offers useful shortcodes to display a post or page content, or a list of posts.
 
-NOTE: This plugin requires WordPress 3.4.x, and will **broke** your current ~2.5 setup.
+NOTE: This plugin requires WordPress 3.4.x, and will **break** your current ~2.5 setup.
 It won't be compatible with [Category Page Extender](http://categorypageextender.wordpress.com) anymore. 
 On activation, it will clean every option set by the previous versions. Please test it offline first.
 
