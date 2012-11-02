@@ -88,6 +88,63 @@ class SWER_aptools{
 add_shortcode( 'showsingle', array( 'SWER_aptools', 'showsingle' ) );
 add_shortcode( 'showlist', array( 'SWER_aptools', 'showlist' ) );
 
+class SWER_aptools_admin{
+
+    function __construct(){
+        add_meta_box( 'aptools_archive_link', 'Archive Link', array( &$this, 'aptools_custom_metabox'), 'page', 'side', 'core' );        
+    }
+
+    function manage_pages_columns( $post_columns ){
+        $post_columns['aptools'] = 'Archive Link';
+        return $post_columns;
+    }
+    
+    function manage_pages_custom_column(){
+        $args = array(
+            'show_count'         => 0,
+            'hide_empty'         => 1,
+            'hierarchical'       => 1,
+            'taxonomy'           => 'category'
+        );
+        wp_dropdown_categories( $args );
+    }
+
+
+    function add_meta_boxes(){
+    }
+    
+    function aptools_custom_metabox(){
+        $args = array(
+            'show_count'         => 0,
+            'hide_empty'         => 1,
+            'hierarchical'       => 1,
+            'taxonomy'           => 'category'
+        );
+        wp_dropdown_categories( $args );
+    }
+    
+    
+    function save_post( $post_id ){
+        // update logic, same for manage_posts_custom_columns
+    	if( $_POST ):
+    	    update_post_meta( $post_id, 'aptools_archive_link', "?");
+    	endif;
+    }
+    
+}
+
+function call_SWER_aptools_admin(){
+    return new SWER_aptools_admin();
+}
+
+add_filter( 'manage_pages_columns', array( 'SWER_aptools_admin', 'manage_pages_columns') );
+add_action( 'manage_pages_custom_column', array( 'SWER_aptools_admin', 'manage_pages_custom_column'), 10, 2);
+if ( is_admin() )
+    add_action( 'load-post.php', 'call_SWER_aptools_admin' );
+
+#add_action( 'add_meta_boxes', array( 'SWER_aptools_admin', 'add_meta_boxes') );
+#add_action( 'save_post', array( 'SWER_aptools_admin', 'save_post' ) );
+
 
 
 /*
