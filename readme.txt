@@ -14,9 +14,15 @@ Useful shortcodes to display a post or page content or a list of posts.
 
 Pages & Posts Shortcodes is a complete rewrite of the "Category Page" plugin.
 It offers useful shortcodes to display a post or page content, or a list of posts.
+Also it allow exclusive mutual bind between a Category and a Page, in order to display the page content as "header" of category archives. 
+
+You can safely use shortcodes inside a post or a page, our you can embed them in your theme 
+using the [do_shortcode](http://codex.wordpress.org/Function_Reference/do_shortcode) WordPress function like that:
+
+`<?php do_shortcode('[showsingle pageid="<id_of_page>"]'); ?>`
 
 NOTE: This plugin requires WordPress 3.4.x, and will **break** your current ~2.5 setup.
-It won't be compatible with [Category Page Extender](http://categorypageextender.wordpress.com) anymore. 
+It also won't be compatible with [Category Page Extender](http://categorypageextender.wordpress.com) anymore. 
 On activation, it will clean every option set by the previous versions. Please test it offline first.
 
 = [showsingle pageid="" postid="" showheader="" header="" headerclass="" wrapper="" wrapperclass=""] =
@@ -35,18 +41,24 @@ This shortcode will show a single post or page. The only required argument is ei
 
 This shortcode will show a list of posts from you. Required argument is catid.
 
-* **catid** - ID of the category you want to list
-* **lenght** - how many posts listed (default: 10)
+* **catid** - ID (**not** slug, nor name) of the category you want to list
+* **lenght** - how many posts listed (default: 10. don't set it too high..)
 * **listclass** - list element's custom CSS class (default: `aptools-list`) 
 * **excerpt** - if *true* shows excerpt alongside title
 * **wrapper** - if *"true"*, wraps the whole output with `<div class="aptools-wrapper"></div>`
 * **wrapperclass** - wrapper custom CSS class (default: `aptools-wrapper`)
 
-You can safely use shortcodes inside a post or a page, our you can embed them in your theme 
-using the [do_shortcode](http://codex.wordpress.org/Function_Reference/do_shortcode) WordPress function like that:
+= [showauto] =
 
-`<?php do_shortcode('[showsingle pageid="<id_of_page>"]'); ?>`
+This shortcode works only on category archives templates: it will display on each category the linked page content.
+You can set up the link either on the page edit admin area or in the category edit area. 
+Please note: a single page can be linked this way to a single category only. 
+If you need more flexible options you should take advantage of [WordPress template hierarchy](http://codex.wordpress.org/Template_Hierarchy): 
+you can create a `category-<category_name>.php` file with a `[showsingle]` shortcode. 
 
+
+[Support Forum on wordpress.org](http://wordpress.org/support/plugin/page2cat)
+[Plugin Development Area](http://dev.swergroup.com/pages-and-posts-shortcodes)
 
 GPL2(C) 2008+ [SWERgroup](http://swergroup.com/)
 
@@ -88,13 +100,16 @@ You can download it by SVN client:
 
 == Changelog ==
 
+= 3.0.1 =
+* (03/11/2012) *[showlist]* shortcode fix, category › page link restored.
+
 = 3.0 =
 * (30/10/2012) Complete rewrite for WordPress 3.4+
 
 == Upgrade Notice ==
 
 = 3.0 =
-This plugin requires WordPress 3.4.x, and will **broke** your current ~2.5 setup.
-It won't be compatible with [Category Page Extender](http://categorypageextender.wordpress.com) anymore. 
+This plugin requires WordPress 3.4.x, and will **break** your current ~2.5 setup.
+It also won't be compatible with [Category Page Extender](http://categorypageextender.wordpress.com) anymore. 
 On activation, it will clean every option set by the previous versions. Please test it offline first.
 

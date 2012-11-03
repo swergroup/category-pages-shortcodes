@@ -45,19 +45,21 @@ class SWER_aptools_shortcodes{
     		'catid' => '',
     		'lenght' => '10',
     		'listclass' => 'aptools-list',
+    		'header' => '2',
+    		'headerclass' => 'aptools-list-header',
     		'excerpt' => 'false',
     		'image' => 'false',
     		'wrapper' => 'false',
     		'wrapperclass' => 'aptools-list-wrapper'
     	), $atts ) );
 
-        $hopen = '<h'.$header.' class='.$class.'>';
+        $hopen = '<h'.$header.' class='.$headerclass.'>';
         $hclose = '</h'.$header.'>';
 
         if( $catid !== '' ):
-            $args = array( 'p' => $postid, 'posts_per_page' => $length );
+            $args = array( 'cat_id' => $catid, 'posts_per_page' => $lenght );
         elseif( $tagid !== '' ):
-            $args = array( 'tag_id' => $tagid, 'posts_per_page' => $length );
+            $args = array( 'tag_id' => $tagid, 'posts_per_page' => $lenght );
         endif;
 
         $page = new WP_Query( $args );
@@ -84,7 +86,27 @@ class SWER_aptools_shortcodes{
 
     
     function showauto(){
-        //
+        global $cat;
+        $query_args = array(
+            'post_type' => 'page',
+            'meta_key' => 'aptools_archive_link',
+            'meta_value' => $cat,
+            'posts_per_page' => 1
+        );
+
+        $pages = new WP_Query( $query_args );
+        #print_r($pages);
+
+        if( $pages->have_posts() ):
+            while( $pages->have_posts() ):
+                $pages->the_post();
+                #$page_id = get_the_ID();
+                the_title();
+                the_content();
+            endwhile;
+        endif;
+        wp_reset_postdata();                
+
     }
 
 }
