@@ -1,6 +1,6 @@
 <?php
 
-class SWER_aptools{
+class SWER_aptools_shortcodes{
 
     function showsingle( $atts ){
     	extract( shortcode_atts( array(
@@ -82,11 +82,16 @@ class SWER_aptools{
         wp_reset_postdata();                
     }
 
+    
+    function showauto(){
+        //
+    }
 
 }
 
-add_shortcode( 'showsingle', array( 'SWER_aptools', 'showsingle' ) );
-add_shortcode( 'showlist', array( 'SWER_aptools', 'showlist' ) );
+add_shortcode( 'showsingle', array( 'SWER_aptools_shortcodes', 'showsingle' ) );
+add_shortcode( 'showlist', array( 'SWER_aptools_shortcodes', 'showlist' ) );
+add_shortcode( 'showauto', array( 'SWER_aptools_shortcodes', 'showauto' ) );
 
 class SWER_aptools_admin{
 
@@ -101,21 +106,12 @@ class SWER_aptools_admin{
     
     function manage_pages_custom_column( $column, $post_id ){
         $selected = get_post_meta( $post_id, 'aptools_archive_link', true );        
-        $args = array(
-            'selected'          => $selected,
-            'show_count'         => 0,
-            'hide_empty'         => 1,
-            'hierarchical'       => 1,
-            'id'                 => 'aptools-custom-'.$post_id,
-            'taxonomy'           => 'category'
-        );
-        wp_dropdown_categories( $args );
+        echo '<a href="'.admin_url( 'edit-tags.php?action=edit&taxonomy=category&tag_ID='.$selected.'&post_type=post' ).'">'.get_the_category_by_ID( $selected ).'</a>';
     }
     
     function aptools_custom_metabox( $post ){
         $selected = get_post_meta( $post->ID, 'aptools_archive_link', true );
-        print_r($selected);
-        /*
+        #print_r($selected);
         wp_nonce_field( plugin_basename( __FILE__ ), 'aptools-nonce' );
         
         $args = array(
@@ -129,7 +125,6 @@ class SWER_aptools_admin{
             'taxonomy'          => 'category'
         );
         wp_dropdown_categories( $args );
-        */
     }
     
     
