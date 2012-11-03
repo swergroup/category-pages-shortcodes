@@ -101,7 +101,6 @@ class SWER_aptools_admin{
     
     function manage_pages_custom_column( $column, $post_id ){
         $selected = get_post_meta( $post_id, 'aptools_archive_link', true );        
-        print_r($selected);
         $args = array(
             'selected'          => $selected,
             'show_count'         => 0,
@@ -114,10 +113,11 @@ class SWER_aptools_admin{
     }
     
     function aptools_custom_metabox( $post ){
-        wp_nonce_field( plugin_basename( __FILE__ ), 'aptools-nonce' );
-        
         $selected = get_post_meta( $post->ID, 'aptools_archive_link', true );
         print_r($selected);
+        /*
+        wp_nonce_field( plugin_basename( __FILE__ ), 'aptools-nonce' );
+        
         $args = array(
             'selected'          => $selected,
             'show_count'        => 0,
@@ -129,6 +129,7 @@ class SWER_aptools_admin{
             'taxonomy'          => 'category'
         );
         wp_dropdown_categories( $args );
+        */
     }
     
     
@@ -176,7 +177,7 @@ class SWER_aptools_admin{
         $query_args = array(
             'post_type' => 'page',
             'meta_key' => 'aptools_archive_link',
-            'meta_value' => $tag,
+            'meta_value' => $tag->term_id,
             'posts_per_page' => 1
         );
 
@@ -185,60 +186,80 @@ class SWER_aptools_admin{
             while( $pages->have_posts() ):
                 $pages->the_post();       
                 #echo 'This category is linked with <a href="'.admin_url('post.php?post='.get_the_ID().'&action=edit').'">'.get_the_title().'</a>';
-                
-                $pages_args = array(
-                    'selected'         => get_the_ID(),
-                    'echo'             => 0,
-                    'name'             => 'aptools_page_id',
-                    'show_option_none' => '(None)'
-                );
+                $selected = get_the_ID();
 
-
-                echo '
-            	<tr class="form-field">
-        			<th scope="row" valign="top"><label for="aptools_link"></label></th>
-        			<td>'.wp_dropdown_pages( $pages_args ).'<br />
-        			<span class="description"></span>
-        			</td>
-        		</tr>            	
-                ';
             endwhile;
-        else:
-            echo 'no page';
         endif;
+
+        $pages_args = array(
+            'selected'         => $selected,
+            'echo'             => 0,
+            'name'             => 'aptools_page_id',
+            'show_option_none' => '(None)'
+        );
+        echo '
+        
+        <input type="hidden" name="aptools_pre_page_id" value="'.$selected  .'" />
+    	<tr class="form-field">
+			<th scope="row" valign="top"><label for="aptools_page_id">Link to Page</label></th>
+			<td>'.wp_dropdown_pages( $pages_args ).'<br />
+			<span class="description">Link this category to a page</span>
+			</td>
+		</tr>            	
+        ';
+
         wp_reset_postdata();
     }
+    
+    function admin_action_editedtag(){
+        if( $_POST['aptools_pre_page_id'] !== $_POST['aptools_page_id'] ):            
+            update_post_meta( $_POST['aptools_pre_page_id'], 'aptools_archive_link', '' );
+            update_post_meta( $_POST['aptools_page_id'], 'aptools_archive_link', $_POST['tag_ID'] );
+        endif;
+    }
+    
     
 }
 
 function call_SWER_aptools_admin(){
     return new SWER_aptools_admin();
 }
-#if ( is_admin() )
-#    add_action( 'post-new.php', 'call_SWER_aptools_admin' );
+
+add_action( 'add_meta_boxes', 'call_SWER_aptools_admin' );
 
 add_filter( 'manage_pages_columns', array( 'SWER_aptools_admin', 'manage_pages_columns') );
 add_action( 'manage_pages_custom_column', array( 'SWER_aptools_admin', 'manage_pages_custom_column'), 10, 2);
-
-add_action( 'add_meta_boxes', 'call_SWER_aptools_admin' );
 add_action( 'save_post', array( 'SWER_aptools_admin', 'save_post' ) );
 
 add_action( 'category_add_form_fields', array( 'SWER_aptools_admin', 'category_add_form_fields' ) );
 add_action( 'category_edit_form_fields', array( 'SWER_aptools_admin', 'category_edit_form_fields' ) );
+add_action( 'admin_action_editedtag' , array('SWER_aptools_admin', 'admin_action_editedtag') );
 
-
-/*
-class SWER_aptools_setup{
-
-    function admin_init() {
-        // settings
-    }
-
-    function admin_menu() {
-        // pages
-    }
+function add_post_tag_columns($columns){
+    $columns['atptools'] = 'Linked Page';
+    return $columns;
 }
-add_action( 'admin_init', array( 'SWER_aptools_setup', 'admin_init' ) );
-add_action( 'admin_menu', array( 'SWER_aptools_setup', 'admin_menu' ) );
-*/
+add_filter('manage_edit-category_columns', 'add_post_tag_columns');
+
+function add_post_tag_column_content($content, $column_name, $id){
+    $query_args = array(
+        'post_type' => 'page',
+        'meta_key' => 'aptools_archive_link',
+        'meta_value' => $id,
+        'posts_per_page' => 1
+    );
+
+    $pages = new WP_Query( $query_args );
+    if( $pages->have_posts() ):
+        while( $pages->have_posts() ):
+            $pages->the_post();       
+            $content .= '<a href="'.admin_url('post.php?post='.get_the_ID().'&action=edit').'">'.get_the_title().'</a>';
+        endwhile;
+    endif;
+
+    return $content;
+}
+add_filter('manage_category_custom_column', 'add_post_tag_column_content', 10, 3);
+
+
 ?>
