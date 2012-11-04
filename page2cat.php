@@ -3,7 +3,7 @@
 Plugin Name: Pages & Posts Shortcodes
 Plugin URI: http://wordpress.org/extend/plugins/aptools/
 Description: Two-way integration between pages and category archives.
-Version: 3.0.1
+Version: 3.0.2
 Author: SWERgroup
 Author URI: http://swergroup.com/
 License: GPL2

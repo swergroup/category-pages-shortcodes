@@ -100,6 +100,9 @@ You can download it by SVN client:
 
 == Changelog ==
 
+= 3.0.2 =
+* (04/11/2012) showlist query fix.
+
 = 3.0.1 =
 * (03/11/2012) *[showlist]* shortcode fix, category › page link restored.
 
@@ -107,6 +110,9 @@ You can download it by SVN client:
 * (30/10/2012) Complete rewrite for WordPress 3.4+
 
 == Upgrade Notice ==
+
+= 3.0.2 = 
+FIX showlist category query.
 
 = 3.0 =
 This plugin requires WordPress 3.4.x, and will **break** your current ~2.5 setup.

@@ -57,9 +57,7 @@ class SWER_aptools_shortcodes{
         $hclose = '</h'.$header.'>';
 
         if( $catid !== '' ):
-            $args = array( 'cat_id' => $catid, 'posts_per_page' => $lenght );
-        elseif( $tagid !== '' ):
-            $args = array( 'tag_id' => $tagid, 'posts_per_page' => $lenght );
+            $args = array( 'category__in' => array($catid), 'posts_per_page' => $lenght );
         endif;
 
         $page = new WP_Query( $args );
