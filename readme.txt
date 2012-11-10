@@ -1,7 +1,7 @@
-=== Pages & Posts Shortcodes ===
-Contributors: swergroup
+=== Category Pages & Posts Shortcodes ===
+Contributors: swergroup, pixline
 Donate link: https://bitly.com/Vpy3MP
-Tags: integration, shortcode, shortcodes, pages, posts, list, archives
+Tags: category, categories, pages, posts, page, post, integration, shortcode, shortcodes, list, archives
 Requires at least: 3.4.2
 Tested up to: 3.4.2
 Stable tag: trunk
@@ -12,7 +12,7 @@ Useful shortcodes to display a post or page content or a list of posts.
 
 == Description ==
 
-Pages & Posts Shortcodes is a complete rewrite of the "Category Page" plugin.
+Category Pages & Posts Shortcodes is a complete rewrite of the "Category Page" plugin.
 It offers useful shortcodes to display a post or page content, or a list of posts.
 Also it allow exclusive mutual bind between a Category and a Page, in order to display the page content as "header" of category archives. 
 
@@ -57,10 +57,11 @@ If you need more flexible options you should take advantage of [WordPress templa
 you can create a `category-<category_name>.php` file with a `[showsingle]` shortcode. 
 
 
-[Support Forum on wordpress.org](http://wordpress.org/support/plugin/page2cat)
-[Plugin Development Area](http://dev.swergroup.com/pages-and-posts-shortcodes)
+GPL2(C) 2008+ [SWER Siti internet Torino](http://swergroup.com/)
 
-GPL2(C) 2008+ [SWERgroup](http://swergroup.com/)
+[Git source code on Bitbucket](http://dev.swergroup.com/pages-and-posts-shortcodes)
+
+[Support Forum on wordpress.org](http://wordpress.org/support/plugin/page2cat)
 
 == Installation ==
 
@@ -100,6 +101,10 @@ You can download it by SVN client:
 
 == Changelog ==
 
+= 3.0.3 =
+* (10/11/2012) Better descriptions in edit-page and edit-category forms
+* (10/11/2012) Fix links
+
 = 3.0.2 =
 * (04/11/2012) showlist query fix.
 
@@ -111,11 +116,17 @@ You can download it by SVN client:
 
 == Upgrade Notice ==
 
+= 3.0.3 =
+CAUTION: This plugin requires WordPress 3.4.x, and will **break** your WP 2.5 setup.
+- Better descriptions in edit-page and edit-category forms
+- Fix links
+
 = 3.0.2 = 
+CAUTION: This plugin requires WordPress 3.4.x, and will **break** your WP 2.5 setup.
 FIX showlist category query.
 
 = 3.0 =
-This plugin requires WordPress 3.4.x, and will **break** your current ~2.5 setup.
+This plugin requires WordPress 3.4.x, and will **break** your WP 2.5 setup.
 It also won't be compatible with [Category Page Extender](http://categorypageextender.wordpress.com) anymore. 
 On activation, it will clean every option set by the previous versions. Please test it offline first.
 

@@ -116,7 +116,7 @@ add_shortcode( 'showauto', array( 'SWER_aptools_shortcodes', 'showauto' ) );
 class SWER_aptools_admin{
 
     function __construct(){
-        add_meta_box( 'aptools_archive_link', 'Archive Link', array( &$this, 'aptools_custom_metabox'), 'page', 'side', 'core' );        
+        add_meta_box( 'aptools_archive_link', 'Category Pages & Posts', array( &$this, 'aptools_custom_metabox'), 'page', 'side', 'core' );        
     }
 
     function manage_pages_columns( $post_columns ){
@@ -145,6 +145,8 @@ class SWER_aptools_admin{
             'taxonomy'          => 'category'
         );
         wp_dropdown_categories( $args );
+        
+        echo '<p>Link this page to a category, and use [showauto] shortcode in your category template to embed that page.</p>';
     }
     
     
@@ -180,9 +182,9 @@ class SWER_aptools_admin{
             
         echo '
             <div class="form-field">
-            	<label for="tag-description">'._x('Link to Page', 'Taxonomy Description').'</label>
+            	<label for="tag-description">'._x('Category Pages & Posts', 'Category Pages & Posts').'</label>
             	'.wp_dropdown_pages( $args ).'
-            	<p>'._('The description is not prominent by default; however, some themes may show it.').'</p>
+            	<p>'._('Link this category to a page, and use [showauto] shortcode in your category template to embed that page.').'</p>
             </div>
         ';
     }
@@ -216,9 +218,9 @@ class SWER_aptools_admin{
         
         <input type="hidden" name="aptools_pre_page_id" value="'.$selected  .'" />
     	<tr class="form-field">
-			<th scope="row" valign="top"><label for="aptools_page_id">Link to Page</label></th>
+			<th scope="row" valign="top"><label for="aptools_page_id">Category Pages & Posts</label></th>
 			<td>'.wp_dropdown_pages( $pages_args ).'<br />
-			<span class="description">Link this category to a page</span>
+			<span class="description">Link this category to a page, and use [showauto] shortcode in your category template to embed that page.</span>
 			</td>
 		</tr>            	
         ';
