@@ -1,14 +1,14 @@
 === Category Pages & Posts Shortcodes ===
 Contributors: swergroup, pixline
-Donate link: https://bitly.com/Vpy3MP
-Tags: category, categories, pages, posts, page, post, integration, shortcode, shortcodes, list, archives
+Donate link: http://swergroup.com
+Tags: categories, categories to pages, related pages, category, categories, pages, posts, page, post, integration, shortcode, shortcodes, list, archives
 Requires at least: 3.4.2
 Tested up to: 3.4.2
 Stable tag: trunk
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Useful shortcodes to display a post or page content or a list of posts.
+Display posts/pages content (or lists of posts) with handy shortcodes, and map categories to pages directly in the admin area.
 
 == Description ==
 
