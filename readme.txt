@@ -101,6 +101,11 @@ You can download it by SVN client:
 
 == Changelog ==
 
+= 3.0.6 =
+* (11/11/2012) FIX Warning on admin Page area. 
+* (11/11/2012) FIX Better headers and descriptions
+* (11/11/2012) FIX [showauto] formatting and styles
+
 = 3.0.5 =
 * (11/11/2012) Fix error on the admin Page area. 
 
@@ -120,7 +125,7 @@ You can download it by SVN client:
 == Upgrade Notice ==
 
 = 3.0.6 =
-* (11/11/2012) FIX Warning . 
+* (11/11/2012) FIX warning on admin page area, [showauto] formatting, headers and descriptions.
 
 = 3.0.5 =
 * (11/11/2012) Fix error on the admin Page area. 
