@@ -93,14 +93,12 @@ class SWER_aptools_shortcodes{
         );
 
         $pages = new WP_Query( $query_args );
-        #print_r($pages);
 
         if( $pages->have_posts() ):
             while( $pages->have_posts() ):
                 $pages->the_post();
-                #$page_id = get_the_ID();
-                the_title();
-                the_content();
+                echo '<h2>'.get_the_title().'</h2>';
+                echo '<div class="aptools-category-content">'.get_the_content().'</div>';
             endwhile;
         endif;
         wp_reset_postdata();                
@@ -120,13 +118,22 @@ class SWER_aptools_admin{
     }
 
     function manage_pages_columns( $post_columns ){
-        $post_columns['aptools'] = 'Archive Link';
+        $post_columns['aptools'] = 'Category';
         return $post_columns;
     }
     
     function manage_pages_custom_column( $column, $post_id ){
-        $selected = get_post_meta( $post_id, 'aptools_archive_link', true );        
-        echo '<a href="'.admin_url( 'edit-tags.php?action=edit&taxonomy=category&tag_ID='.$selected.'&post_type=post' ).'">'.get_the_category_by_ID( $selected ).'</a>';
+        $selected = (int) get_post_meta( $post_id, 'aptools_archive_link', true );        
+        
+    	$category = &get_category( $selected );
+    	if ( is_wp_error( $category ) ) return false;
+
+        if( $category ):
+        echo '<a 
+            href="'.admin_url( 'edit-tags.php?action=edit&taxonomy=category&tag_ID='.$selected.'&post_type=post' ).'">'
+            .$category->name
+            .'</a>';
+        endif;
     }
     
     function aptools_custom_metabox( $post ){
@@ -155,7 +162,7 @@ class SWER_aptools_admin{
         if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) 
         return;
 
-        if ( !wp_verify_nonce( $_POST[ 'aptools-nonce' ], plugin_basename( __FILE__ ) ) )
+        if ( !isset($_POST[ 'aptools-nonce' ]) || !wp_verify_nonce( $_POST[ 'aptools-nonce' ], plugin_basename( __FILE__ ) ) )
         return;
         
         if ( 'page' == $_POST['post_type'] ){
@@ -189,7 +196,7 @@ class SWER_aptools_admin{
         ';
     }
     
-    function category_edit_form_fields( $tag, $taxonomy ){
+    function category_edit_form_fields( $tag ){
 
         $query_args = array(
             'post_type' => 'page',
@@ -197,7 +204,8 @@ class SWER_aptools_admin{
             'meta_value' => $tag->term_id,
             'posts_per_page' => 1
         );
-
+        
+        $selected = 0;
         $pages = new WP_Query( $query_args );
         if( $pages->have_posts() ):
             while( $pages->have_posts() ):
@@ -207,7 +215,7 @@ class SWER_aptools_admin{
 
             endwhile;
         endif;
-
+        
         $pages_args = array(
             'selected'         => $selected,
             'echo'             => 0,
@@ -253,7 +261,7 @@ add_action( 'category_edit_form_fields', array( 'SWER_aptools_admin', 'category_
 add_action( 'admin_action_editedtag' , array('SWER_aptools_admin', 'admin_action_editedtag') );
 
 function add_post_tag_columns($columns){
-    $columns['atptools'] = 'Linked Page';
+    $columns['atptools'] = 'Page';
     return $columns;
 }
 add_filter('manage_edit-category_columns', 'add_post_tag_columns');

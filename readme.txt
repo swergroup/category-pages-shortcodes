@@ -1,14 +1,14 @@
 === Category Pages & Posts Shortcodes ===
 Contributors: swergroup, pixline
-Donate link: http://swergroup.com
-Tags: categories, categories to pages, related pages, category, categories, pages, posts, page, post, integration, shortcode, shortcodes, list, archives
+Donate link: https://bitly.com/Vpy3MP
+Tags: category, categories, pages, posts, page, post, integration, shortcode, shortcodes, list, archives
 Requires at least: 3.4.2
 Tested up to: 3.4.2
 Stable tag: trunk
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Display posts/pages content (or lists of posts) with handy shortcodes, and map categories to pages directly in the admin area.
+Useful shortcodes to display a post or page content or a list of posts.
 
 == Description ==
 
@@ -101,6 +101,9 @@ You can download it by SVN client:
 
 == Changelog ==
 
+= 3.0.5 =
+* (11/11/2012) Fix error on the admin Page area. 
+
 = 3.0.3 =
 * (10/11/2012) Better descriptions in edit-page and edit-category forms
 * (10/11/2012) Fix links
@@ -115,6 +118,12 @@ You can download it by SVN client:
 * (30/10/2012) Complete rewrite for WordPress 3.4+
 
 == Upgrade Notice ==
+
+= 3.0.6 =
+* (11/11/2012) FIX Warning . 
+
+= 3.0.5 =
+* (11/11/2012) Fix error on the admin Page area. 
 
 = 3.0.3 =
 CAUTION: This plugin requires WordPress 3.4.x, and will **break** your WP 2.5 setup.
