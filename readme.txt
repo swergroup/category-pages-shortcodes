@@ -1,9 +1,9 @@
 === Category Pages & Posts Shortcodes ===
 Contributors: swergroup, pixline
-Donate link: https://bitly.com/Vpy3MP
+Donate link: http://swergroup.com
 Tags: category, categories, pages, posts, page, post, integration, shortcode, shortcodes, list, archives
 Requires at least: 3.4.2
-Tested up to: 3.4.2
+Tested up to: 3.5.1
 Stable tag: trunk
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -57,7 +57,7 @@ If you need more flexible options you should take advantage of [WordPress templa
 you can create a `category-<category_name>.php` file with a `[showsingle]` shortcode. 
 
 
-GPL2(C) 2008+ [SWER Siti internet Torino](http://swergroup.com/)
+GPL2(C) 2008+ [SWER Sviluppo siti internet Torino](http://swergroup.com/sviluppo/siti-internet-torino/)
 
 [Git source code on Bitbucket](http://dev.swergroup.com/pages-and-posts-shortcodes)
 
@@ -71,6 +71,16 @@ GPL2(C) 2008+ [SWER Siti internet Torino](http://swergroup.com/)
 1. Enjoy!
 
 == Frequently Asked Questions ==
+
+= How to show all the posts of a certain category in one page? =
+
+`[showlist catid="<category_ID>" length="<number_of_posts>"]`
+
+where category_ID is your category number and number_of_posts is a number higher than your category posts count.
+
+= How can I modify my theme? =
+
+http://wordpress.org/support/topic/how-to-place-this-plugin-in-my-theme
 
 = Is this plugin supported? =
 
