@@ -49,12 +49,11 @@ class Page2catTest extends WP_UnitTestCase {
         	has_filter( 'manage_pages_columns', array( 'SWER_aptools_admin', 'manage_pages_columns' ) ), 
         	'Filter manage_pages_columns not loading.');
 
-        /*
-		add_action( 'manage_pages_custom_column', array( 'SWER_aptools_admin', 'manage_pages_custom_column' ), 10, 2);
-		add_action( 'save_post', array( 'SWER_aptools_admin', 'save_post' ) );
-        */
-
     }
+
+	function testFactory(){
+		$this->assertGreaterThan( 0, $this->factory->post->create_many(25) , 'Could not create many posts.');
+	}
 
 	function test_manage_pages_columns(){
 		$post_columns = array();
@@ -80,10 +79,6 @@ class Page2catTest extends WP_UnitTestCase {
 		$id = '';
 		$payload = $this->plugin->add_post_tag_column_content($content, $column_name, $id);
 		$this->assertEquals( '', $payload, 'Column contains content');
-	}
-
-	function testFactory(){
-		$this->assertGreaterThan( 0, $this->factory->post->create_many(25) , 'Could not create many posts.');
 	}
 
 

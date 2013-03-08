@@ -285,7 +285,6 @@ function call_SWER_aptools_admin(){
 }
 
 add_action( 'add_meta_boxes', 'call_SWER_aptools_admin' );
-
 add_action( 'admin_action_editedtag' ,          array( 'SWER_aptools_admin', 'admin_action_editedtag' ) );
 add_action( 'category_add_form_fields',         array( 'SWER_aptools_admin', 'category_add_form_fields' ) );
 add_action( 'category_edit_form_fields',        array( 'SWER_aptools_admin', 'category_edit_form_fields' ) );
@@ -294,6 +293,5 @@ add_filter( 'manage_category_custom_column',    array( 'SWER_aptools_admin', 'ad
 add_filter( 'manage_pages_columns',             array( 'SWER_aptools_admin', 'manage_pages_columns' ) );
 add_action( 'manage_pages_custom_column',       array( 'SWER_aptools_admin', 'manage_pages_custom_column' ), 10, 2);
 add_action( 'save_post',                        array( 'SWER_aptools_admin', 'save_post' ) );
-
 
 ?>
