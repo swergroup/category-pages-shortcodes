@@ -32,7 +32,7 @@ License: GPL2
 // some definition we will use
 define( 'SWER_PUGIN_NAME', 'Category Pages & Posts Shortcodes');
 define( 'SWER_PLUGIN_DIRECTORY', 'aptools');
-define( 'SWER_CURRENT_VERSION', '3.0.6' );
+define( 'SWER_CURRENT_VERSION', '3.1' );
 define( 'SWER_LOGPATH', str_replace('\\', '/', WP_CONTENT_DIR).'/swer-logs/');
 define( 'SWER_I18N_DOMAIN', 'aptools' );
 

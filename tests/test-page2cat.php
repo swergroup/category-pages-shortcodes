@@ -11,6 +11,49 @@ class Page2catTest extends WP_UnitTestCase {
 
     function testPluginInit(){
         $this->assertFalse( null == $this->plugin , 'Plugin is not working');
+
+        $this->assertGreaterThan( 0, 
+        	has_action( 'add_meta_boxes', 'call_SWER_aptools_admin'), 
+        	'Action add_meta_boxes not loading.');
+
+        $this->assertGreaterThan( 0, 
+        	has_action( 'admin_action_editedtag', array( 'SWER_aptools_admin', 'admin_action_editedtag' ) ), 
+        	'Action admin_action_editedtag not loading');
+
+        $this->assertGreaterThan( 0, 
+        	has_action( 'category_add_form_fields', array( 'SWER_aptools_admin', 'category_add_form_fields' ) ), 
+        	'Action category_add_form_fields not loading.');
+
+        $this->assertGreaterThan( 0, 
+        	has_action( 'category_edit_form_fields', array( 'SWER_aptools_admin', 'category_edit_form_fields' ) ), 
+        	'Action category_edit_form_fields not loading.');
+
+        $this->assertGreaterThan( 0, 
+        	has_action( 'manage_pages_custom_column', array( 'SWER_aptools_admin', 'manage_pages_custom_column' ) ), 
+        	'Action manage_pages_custom_column not loading.');
+
+        $this->assertGreaterThan( 0, 
+        	has_action( 'save_post', array( 'SWER_aptools_admin', 'save_post' ) ), 
+        	'Action save_post not loading.');
+
+
+        $this->assertGreaterThan( 0, 
+        	has_filter( 'manage_edit-category_columns', array( 'SWER_aptools_admin', 'add_post_tag_columns' ) ), 
+        	'Filter manage_edit-category_columns not loading.');
+
+        $this->assertGreaterThan( 0, 
+        	has_filter( 'manage_category_custom_column', array( 'SWER_aptools_admin', 'add_post_tag_column_content' ), '' ), 
+        	'Filter manage_category_custom_column not loading.');
+
+        $this->assertGreaterThan( 0, 
+        	has_filter( 'manage_pages_columns', array( 'SWER_aptools_admin', 'manage_pages_columns' ) ), 
+        	'Filter manage_pages_columns not loading.');
+
+        /*
+		add_action( 'manage_pages_custom_column', array( 'SWER_aptools_admin', 'manage_pages_custom_column' ), 10, 2);
+		add_action( 'save_post', array( 'SWER_aptools_admin', 'save_post' ) );
+        */
+
     }
 
 	function test_manage_pages_columns(){
@@ -38,6 +81,11 @@ class Page2catTest extends WP_UnitTestCase {
 		$payload = $this->plugin->add_post_tag_column_content($content, $column_name, $id);
 		$this->assertEquals( '', $payload, 'Column contains content');
 	}
+
+	function testFactory(){
+		$this->assertGreaterThan( 0, $this->factory->post->create_many(25) , 'Could not create many posts.');
+	}
+
 
 
 }
