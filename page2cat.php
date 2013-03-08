@@ -3,7 +3,7 @@
 Plugin Name: Category Pages & Posts Shortcodes
 Plugin URI: http://wordpress.org/extend/plugins/page2cat/
 Description: Display posts/pages content (or lists of posts) with handy shortcodes, and map categories to pages directly in the admin area.
-Version: 3.0.6
+Version: 3.1
 Author: SWERgroup
 Author URI: http://swergroup.com/
 License: GPL2

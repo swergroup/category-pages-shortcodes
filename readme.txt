@@ -2,7 +2,7 @@
 Contributors: swergroup, pixline
 Donate link: http://swergroup.com
 Tags: category, categories, pages, posts, page, post, integration, shortcode, shortcodes, list, archives
-Requires at least: 3.4.2
+Requires at least: 3.4
 Tested up to: 3.5.1
 Stable tag: trunk
 License: GPLv2
