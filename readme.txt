@@ -5,8 +5,6 @@ Tags: category, categories, pages, posts, page, post, integration, shortcode, sh
 Requires at least: 3.4
 Tested up to: 3.5.1
 Stable tag: trunk
-License: GPLv2
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Useful shortcodes to display a post or page content or a list of posts.
 
