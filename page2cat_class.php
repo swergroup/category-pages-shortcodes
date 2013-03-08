@@ -1,5 +1,7 @@
 <?php
 
+if( ! array_key_exists( 'swer-page2cat-shortcodes', $GLOBALS ) ) { 
+
 class SWER_aptools_shortcodes{
 
     function showsingle( $atts ){
@@ -107,14 +109,20 @@ class SWER_aptools_shortcodes{
 
 }
 
+
+    $GLOBALS['swer-page2cat-shortcodes'] = new SWER_aptools_shortcodes();
+}
+
+
 add_shortcode( 'showsingle', array( 'SWER_aptools_shortcodes', 'showsingle' ) );
 add_shortcode( 'showlist', array( 'SWER_aptools_shortcodes', 'showlist' ) );
 add_shortcode( 'showauto', array( 'SWER_aptools_shortcodes', 'showauto' ) );
 
+if( ! array_key_exists( 'swer-page2cat-admin', $GLOBALS ) ) { 
 class SWER_aptools_admin{
 
     function __construct(){
-        add_meta_box( 'aptools_archive_link', 'Category Pages & Posts', array( &$this, 'aptools_custom_metabox'), 'page', 'side', 'core' );        
+        if( !defined('SWER_PHPUNIT') && !SWER_PHPUNIT) add_meta_box( 'aptools_archive_link', 'Category Pages & Posts', array( &$this, 'aptools_custom_metabox'), 'page', 'side', 'core' );        
     }
 
     function manage_pages_columns( $post_columns ){
@@ -267,6 +275,9 @@ class SWER_aptools_admin{
 
         return $content;
     }    
+}
+
+    $GLOBALS['swer-page2cat-admin'] = new SWER_aptools_admin();
 }
 
 function call_SWER_aptools_admin(){
