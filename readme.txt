@@ -2,7 +2,7 @@
 Contributors: swergroup, pixline
 Donate link: http://swergroup.com
 Tags: category, categories, pages, posts, page, post, integration, shortcode, shortcodes, list, archives
-Requires at least: 3.4
+Requires at least: 3.5.1
 Tested up to: 3.5.1
 Stable tag: trunk
 
@@ -108,6 +108,12 @@ You can download it by SVN client:
 1. Sample page inclusion as an archive page header via [showsingle]
 
 == Changelog ==
+
+= 3.2.0 =
+* (20/05/2013) FIX activation issues and rendering bug
+* (20/05/2013) FIX do_shortcode on content (props Xmod08 + MRLR2)
+* (20/05/2013) NEW admin sections / options
+* (20/05/2013) NEW initial test support
 
 = 3.0.6 =
 * (11/11/2012) FIX Warning on admin Page area. 

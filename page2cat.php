@@ -55,29 +55,33 @@ register_uninstall_hook( __FILE__, 'aptools_uninstall' );
 
 // activating the default values
 function aptools_activate() {
-    // <3.0 cleaning
-    
-    delete_option( 'pixline_aptools_version' );
-	delete_option( 'p2c_use_empty' );
-    delete_option( 'p2c_show_used_pages' );
-    delete_option( 'p2c_catlist_limit' );
-    delete_option( 'p2c_catlist_title' );
-    delete_option( 'p2c_excerpt_settings' );
-    delete_option( 'p2c_post_settings' );
-    delete_option( 'p2c_excerpt_length' );
-    delete_option( 'p2c_use_thumbnail' );
-    delete_option( 'p2c_img_class' );
-    delete_option( 'p2c_title_class' );
-    delete_option( 'p2c_thumbnail_size' );
-    delete_option( 'p2c_use_img' );
-    
-    $default_options = array(
-        'version'   => SWER_CURRENT_VERSION,
-        'template'  => array(),
-        'shortcode' => array()
-    );
-        
-	add_option( 'aptools_options', json_encode( $default_options ) );
+ // <3.0 cleaning
+ if ( version_compare( $wp_version, '3.5.1', '<' ) ) {
+     deactivate_plugins( __FILE__ );
+     wp_die( __( 'Page2cat requires WordPress 3.5.1 or newer.', 'page2cat' ), __( 'Please upgrade your Wordpress.', 'page2cat' ) );
+ }
+
+ delete_option( 'pixline_aptools_version' );
+ delete_option( 'p2c_use_empty' );
+ delete_option( 'p2c_show_used_pages' );
+ delete_option( 'p2c_catlist_limit' );
+ delete_option( 'p2c_catlist_title' );
+ delete_option( 'p2c_excerpt_settings' );
+ delete_option( 'p2c_post_settings' );
+ delete_option( 'p2c_excerpt_length' );
+ delete_option( 'p2c_use_thumbnail' );
+ delete_option( 'p2c_img_class' );
+ delete_option( 'p2c_title_class' );
+ delete_option( 'p2c_thumbnail_size' );
+ delete_option( 'p2c_use_img' );
+
+ $default_options = array(
+     'version'   => SWER_CURRENT_VERSION,
+     'template'  => array(),
+     'shortcode' => array()
+ );
+     
+ add_option( 'aptools_options', json_encode( $default_options ) );
 }
 
 // deactivating

@@ -15,41 +15,41 @@ class Page2cat_Core_Test extends WP_UnitTestCase {
 
     function testActionsHooks(){
         $this->assertGreaterThan( 0, 
-        	has_action( 'add_meta_boxes', 'call_SWER_aptools_admin'), 
+        	has_action( 'add_meta_boxes', array( 'Page2catAdmin', 'add_meta_boxes' ) ), 
         	'Action add_meta_boxes not loading.');
 
         $this->assertGreaterThan( 0, 
-        	has_action( 'admin_action_editedtag', array( 'SWER_aptools_admin', 'admin_action_editedtag' ) ), 
+        	has_action( 'admin_action_editedtag', array( 'Page2catAdmin', 'admin_action_editedtag' ) ), 
         	'Action admin_action_editedtag not loading');
 
         $this->assertGreaterThan( 0, 
-        	has_action( 'category_add_form_fields', array( 'SWER_aptools_admin', 'category_add_form_fields' ) ), 
+        	has_action( 'category_add_form_fields', array( 'Page2catAdmin', 'category_add_form_fields' ) ), 
         	'Action category_add_form_fields not loading.');
 
         $this->assertGreaterThan( 0, 
-        	has_action( 'category_edit_form_fields', array( 'SWER_aptools_admin', 'category_edit_form_fields' ) ), 
+        	has_action( 'category_edit_form_fields', array( 'Page2catAdmin', 'category_edit_form_fields' ) ), 
         	'Action category_edit_form_fields not loading.');
 
         $this->assertGreaterThan( 0, 
-        	has_action( 'manage_pages_custom_column', array( 'SWER_aptools_admin', 'manage_pages_custom_column' ) ), 
+        	has_action( 'manage_pages_custom_column', array( 'Page2catAdmin', 'manage_pages_custom_column' ) ), 
         	'Action manage_pages_custom_column not loading.');
 
         $this->assertGreaterThan( 0, 
-        	has_action( 'save_post', array( 'SWER_aptools_admin', 'save_post' ) ), 
+        	has_action( 'save_post', array( 'Page2catAdmin', 'save_post' ) ), 
         	'Action save_post not loading.');
     }
 
     function testFiltersHooks(){
         $this->assertGreaterThan( 0, 
-        	has_filter( 'manage_edit-category_columns', array( 'SWER_aptools_admin', 'add_post_tag_columns' ) ), 
+        	has_filter( 'manage_edit-category_columns', array( 'Page2catAdmin', 'add_post_tag_columns' ) ), 
         	'Filter manage_edit-category_columns not loading.');
 
         $this->assertGreaterThan( 0, 
-        	has_filter( 'manage_category_custom_column', array( 'SWER_aptools_admin', 'add_post_tag_column_content' ), '' ), 
+        	has_filter( 'manage_category_custom_column', array( 'Page2catAdmin', 'add_post_tag_column_content' ), '' ), 
         	'Filter manage_category_custom_column not loading.');
 
         $this->assertGreaterThan( 0, 
-        	has_filter( 'manage_pages_columns', array( 'SWER_aptools_admin', 'manage_pages_columns' ) ), 
+        	has_filter( 'manage_pages_columns', array( 'Page2catAdmin', 'manage_pages_columns' ) ), 
         	'Filter manage_pages_columns not loading.');
 
     }

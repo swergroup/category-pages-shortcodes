@@ -14,6 +14,8 @@ if ( ! array_key_exists( 'swer-page2cat-shortcodes', $GLOBALS ) ) {
   		'headerclass' => 'aptools-single-header',
   		'wrapper' => 'false',
   		'wrapperclass' => 'aptools-wrapper',
+    'content' => 'true',
+    'contentclass' => 'aptools-content',
   	 ),
      $atts
     )
@@ -21,6 +23,9 @@ if ( ! array_key_exists( 'swer-page2cat-shortcodes', $GLOBALS ) ) {
 
    $hopen = '<h'.$header.' class='.$headerclass.'>';
    $hclose = '</h'.$header.'>';
+   $copen = '<div class='.$contentclass.'>';
+   $cclose = '</div>';
+   $output = '';
 
    if ( $postid === '' && $pageid !== '' ) :
        $args = array( 'page_id' => $pageid, 'posts_per_page' => 1 );
@@ -31,20 +36,19 @@ if ( ! array_key_exists( 'swer-page2cat-shortcodes', $GLOBALS ) ) {
    $page = new WP_Query( $args );
    if ( $page->have_posts() ):
     if ( $wrapper !== 'false' ){
-        echo '<div class="'.$wrapperclass.'">';
+        $output .= '<div class="'.$wrapperclass.'">';
     }
     while ( $page->have_posts() ):
         $page->the_post();
-        if ( $showheader === 'true' ) _e( $hopen ) . get_the_title() . $hclose;
-        _e( get_the_content() );
+        if ( $showheader === 'true' ) $output .= $hopen . get_the_title() . $hclose;
+        if ( $content === 'true' ) $output .= $copen . do_shortcode( get_the_content() ) . $cclose;
     endwhile;
     if ( $wrapper !== 'false' ){
-        echo '</div>';
+        $output .= '</div>';
     }
-   else
-       wp_die( 'error.' );
    endif;
    wp_reset_postdata();                
+   _e( $output );
   }
 
 
@@ -143,6 +147,21 @@ if ( ! array_key_exists( 'swer-page2cat-admin', $GLOBALS ) ) {
      add_meta_box( 'aptools_archive_link', 'Category Pages & Posts', array( 'Page2CatAdmin', 'aptools_custom_metabox' ), 'page', 'side', 'core' );        
   }
 
+  function admin_init() {
+   add_settings_section( 'page2cat', 'Plugin: Category, Pages & Posts Shortcodes', array( 'Page2CatAdmin', 'settings_section' ), 'reading' );
+   add_settings_field( 'p2c_template', 'Post snippet template', array( 'Page2CatAdmin', 'field_1' ), 'reading', 'page2cat', array( 'label_for' => 'p2c_template') );
+  }
+
+
+  function settings_section(){
+   _e( 'Category, Pages & Posts Shortcodes settings!' );
+  }
+
+  function field_1(){
+   _e( '<textarea name="p2c_template" id="p2c_template" class="" rows="4" cols="80"></textarea>' );
+  }
+
+
   function manage_pages_columns( $post_columns ){
       $post_columns['aptools'] = 'Category';
       return $post_columns;
@@ -231,7 +250,8 @@ if ( ! array_key_exists( 'swer-page2cat-admin', $GLOBALS ) ) {
    
    $selected = 0;
    $pages = new WP_Query( $query_args );
-   if ( $pages->have_posts() ):
+
+   if ( $pages->have_posts() ) :
     while ( $pages->have_posts() ):
         $pages->the_post();       
         #echo 'This category is linked with <a href="'.admin_url('post.php?post='.get_the_ID().'&action=edit').'">'.get_the_title().'</a>';
@@ -311,6 +331,9 @@ if ( ! array_key_exists( 'swer-page2cat-admin', $GLOBALS ) ) {
 
 add_action( 'add_meta_boxes', array( 'Page2catAdmin', 'add_meta_boxes' ) );
 add_action( 'admin_action_editedtag' , array( 'Page2catAdmin', 'admin_action_editedtag' ) );
+
+add_action( 'admin_init', array( 'Page2CatAdmin', 'admin_init' ) );
+
 add_action( 'category_add_form_fields', array( 'Page2catAdmin', 'category_add_form_fields' ) );
 add_action( 'category_edit_form_fields', array( 'Page2catAdmin', 'category_edit_form_fields' ) );
 add_filter( 'manage_edit-category_columns', array( 'Page2catAdmin', 'add_post_tag_columns' ) );
