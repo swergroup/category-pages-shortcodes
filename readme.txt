@@ -8,7 +8,7 @@ Stable tag: trunk
 
 Useful shortcodes to display a post or page content or a list of posts.
 
-[![Build Status](https://travis-ci.org/swergroup/category-pages-shortcodes.png?branch=master)](https://travis-ci.org/swergroup/category-pages-shortcodes)
+[![Build Status (git master)](https://travis-ci.org/swergroup/category-pages-shortcodes.png?branch=master)](https://travis-ci.org/swergroup/category-pages-shortcodes)
 
 == Description ==
 
