@@ -1,17 +1,19 @@
 <?php
 
-class Page2catTest extends WP_UnitTestCase {
+class Page2cat_Core_Test extends WP_UnitTestCase {
 
-	private $plugin;
+ private $plugin;
 
-    function setUp(){
+ function setup(){
         parent::setUp();
         $this->plugin = $GLOBALS['swer-page2cat-admin'];
     }
 
     function testPluginInit(){
         $this->assertFalse( null == $this->plugin , 'Plugin is not working');
+    }
 
+    function testActionsHooks(){
         $this->assertGreaterThan( 0, 
         	has_action( 'add_meta_boxes', 'call_SWER_aptools_admin'), 
         	'Action add_meta_boxes not loading.');
@@ -35,8 +37,9 @@ class Page2catTest extends WP_UnitTestCase {
         $this->assertGreaterThan( 0, 
         	has_action( 'save_post', array( 'SWER_aptools_admin', 'save_post' ) ), 
         	'Action save_post not loading.');
+    }
 
-
+    function testFiltersHooks(){
         $this->assertGreaterThan( 0, 
         	has_filter( 'manage_edit-category_columns', array( 'SWER_aptools_admin', 'add_post_tag_columns' ) ), 
         	'Filter manage_edit-category_columns not loading.');
