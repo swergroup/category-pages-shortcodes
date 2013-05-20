@@ -23,9 +23,8 @@ class Page2cat_Shortcode_Test extends WP_UnitTestCase {
  	$this->assertEquals( '', $out2 );
 
  	#$out3 = $this->plugin->showsingle( array( 'postid' => '1' ) );
-  $out3 = do_shortcode( '[showsingle postid="1"]' );
- 	$this->assertEquals( 'a', $out3 );
-
+  #$out3 = do_shortcode( '[showsingle postid="1"]' );
+ 	#$this->assertEquals( 'a', $out3 );
 
  }
 
