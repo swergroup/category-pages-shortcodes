@@ -6,7 +6,7 @@ if ( ! array_key_exists( 'swer-page2cat-shortcodes', $GLOBALS ) )
 
   function showsingle( $atts ){
     global $post;
-    $output = '';
+    $clean = $output = false;
 
     extract(
      shortcode_atts(
@@ -45,11 +45,13 @@ if ( ! array_key_exists( 'swer-page2cat-shortcodes', $GLOBALS ) )
 
 
   function showlist( $atts ){
+    $clean = $output = false;
+
     extract(
      shortcode_atts(
       array(
         'catid' => '',
-        'lenght' => '10',
+        'length' => '10',
         'listclass' => 'aptools-list page2cat-list',
         'header' => '2',
         'headerclass' => 'aptools-list-header page2cat-list-header',
@@ -62,35 +64,14 @@ if ( ! array_key_exists( 'swer-page2cat-shortcodes', $GLOBALS ) )
      )
     );
 
-   $hopen = '<h'.$header.' class='.$headerclass.'>';
-   $hclose = '</h'.$header.'>';
 
-   if ( $catid !== '' ) :
-       $args = array( 'category__in' => array($catid), 'posts_per_page' => $lenght );
+   if ( isset( $catid ) ) :
+    ob_start();
+    $output = self::shortcode_list( $atts );
+    _e( $output );
+    $clean = ob_get_clean();
    endif;
-
-   $page = new WP_Query( $args );
-   if ( $page->have_posts() ):
-    if ( $wrapper !== 'false' ){
-        echo '<div class="'.$wrapperclass.'">';
-    }
-    echo '<ul class="'.$listclass.'">';
-    while ( $page->have_posts() ):
-     $page->the_post();
-     echo '<li>';
-     echo '<a href="'.get_permalink().'">'.get_the_title().'</a>'; 
-     if ( $image !== 'false' && has_post_thumbnail() ){
-       the_post_thumbnail( $image );
-     }
-     if ( $excerpt === 'true' ) echo ' <span>'.get_the_excerpt().'</span>';
-     echo '</li>';
-    endwhile;
-    echo '</ul>';
-    if ( $wrapper !== 'false' ){
-        echo '</div>';
-    }
-   endif;
-   wp_reset_postdata();                
+   return $clean;
   }
 
     
@@ -113,18 +94,6 @@ if ( ! array_key_exists( 'swer-page2cat-shortcodes', $GLOBALS ) )
       'wrapper' => 'false',
       'wrapperclass' => 'aptools-wrapper page2cat-wrapper',
     );
-
-   /*
-   $pages = new WP_Query( $query_args );
-   if ( $pages->have_posts() ):
-    while ( $pages->have_posts() ):
-        $pages->the_post();
-        echo '<h2>'.get_the_title().'</h2>';
-        echo '<div class="aptools-category-content page2cat-category-content">'.get_the_content().'</div>';
-    endwhile;
-   endif;
-   wp_reset_postdata();                
-   */
 
    ob_start();
    $output = self::shortcode_pages( $defaults, $query_args );

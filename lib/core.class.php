@@ -5,6 +5,9 @@ if ( ! array_key_exists( 'swer-page2cat-core', $GLOBALS ) ) {
 
 
   function do_header( $text, $level = '2', $class = 'aptools-single-header page2cat-single-header' ){
+    if ( $text === null )
+      return '';
+
     $hopen = '<h'.$level.' class="'.$class.'">';
     $hclose = '</h'.$level.'>';
     return $hopen . $text . $hclose;
@@ -18,6 +21,15 @@ if ( ! array_key_exists( 'swer-page2cat-core', $GLOBALS ) ) {
 
   function do_wrapper( $content, $class = 'aptools-wrapper page2cat-wrapper' ){
     $output = '<div class="'.$class.'">'.$content.'</div>';
+    return $output;
+  }
+
+  function do_list_item( $post, $excerpt = 'false', $image = 'false', $headerlink = 'true' ){
+    # error_log( json_encode( $post ) ); 
+    $title = ( $headerlink === 'true' ) ? '<a href="'.get_permalink( $post->ID ).'">'.$post->post_title.'</a>' : $post->post_title; 
+    $pre = ( $image === 'true' ) ? get_the_post_thumbnail( $post->ID, array( 16, 16 ), array( 'class' => 'page2cat-list-icon' ) ) : null;
+    $post = ( $excerpt === 'true' ) ? '<span>' . get_the_excerpt() . '</span>' : null;
+    $output = '<li> ' . $pre . ' ' . $title . ' ' . $post . ' </li>';
     return $output;
   }
 
@@ -91,6 +103,46 @@ if ( ! array_key_exists( 'swer-page2cat-core', $GLOBALS ) ) {
    wp_reset_postdata();                
    return $output;
   }
+
+  function shortcode_list( $args ){
+    extract(
+     shortcode_atts(
+      array(
+      'catid' => '',
+      'length' => '10',
+      'listclass' => 'aptools-list page2cat-list',
+      'showheader' => 'true',
+      'header' => '2',
+      'headertext' => 'Posts',
+      'headerclass' => 'aptools-list-header page2cat-list-header',
+      'excerpt' => 'false',
+      'image' => 'false',
+      'link' => 'true',
+      'wrapper' => 'false',
+      'wrapperclass' => 'aptools-wrapper page2cat-wrapper',
+      ),
+      $args
+     )
+    );
+
+   $output = '';
+   if ( isset( $catid ) ):
+    $posts = get_posts( array( 'posts_per_page' => $length, 'numberposts' => $length, 'category' => $catid ) );
+
+    if ( $showheader === 'true' ) $output .= self::do_header( $headertext, $header, $headerclass );
+    foreach ( $posts as $key => $post ):
+      $output .= self::do_list_item( $post, $excerpt, $image, $link );
+    endforeach;
+    if ( $wrapper !== 'false' ) $output = self::do_wrapper( $output, $wrapperclass );
+   endif;
+   wp_reset_postdata();
+   return $output;
+  }
+
+
+
+
+
 
  }
 
