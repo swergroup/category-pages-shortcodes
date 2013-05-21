@@ -51,6 +51,37 @@ if ( ! array_key_exists( 'swer-page2cat-core', $GLOBALS ) ) {
    return $output;
   }
 
+  function shortcode_pages( $args ){
+    extract(
+     shortcode_atts(
+      array(
+      'pageid' => '',
+      'showheader' => 'true',
+      'header' => '2',
+      'headerclass' => 'aptools-single-header page2cat-single-header',
+      'content' => 'true',
+      'contentclass' => 'aptools-content page2cat-content',
+      'wrapper' => 'false',
+      'wrapperclass' => 'aptools-wrapper page2cat-wrapper',
+      ),
+      $args
+     )
+    );
+
+   $output = '';
+   #$args = array( 'p' => $postid );
+   $page = get_page( $pageid );
+   # error_log( json_encode( $page ) ); die();
+   if ( isset( $page->ID ) ):
+     if ( $showheader === 'true' ) $output .= self::do_header( $page->post_title, $header, $headerclass );
+     if ( $content === 'true' ) $output .= self::do_content( $page->post_content, $contentclass );
+     if ( $wrapper !== 'false' ) $output = self::do_wrapper( $output, $wrapperclass );
+   endif;
+   wp_reset_postdata();
+   return $output;
+  }
+
+
 
  }
 

@@ -5,6 +5,7 @@ if ( ! array_key_exists( 'swer-page2cat-shortcodes', $GLOBALS ) )
  class Page2catShortcodes extends Page2cat_Core {
 
   function showsingle( $atts ){
+    global $post;
     $output = '';
 
     extract(
@@ -24,13 +25,15 @@ if ( ! array_key_exists( 'swer-page2cat-shortcodes', $GLOBALS ) )
      )
     );
 
+   if ( $postid == $post->ID ) return;
+   if ( $pageid == $post->ID ) return;
     # print_r( $atts); die();
    ob_start();
 
    if ( !empty( $postid ) && empty( $pageid ) ) :
     $output = self::shortcode_posts( $atts );
    elseif ( !empty( $pageid ) && empty( $postid ) ) :
-    $output = self::shortcode_page( $atts );
+    $output = self::shortcode_pages( $atts );
    else :
     $output = false;
    endif;

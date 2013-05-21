@@ -111,13 +111,14 @@ You can download it by SVN client:
 
 == Changelog ==
 
-= 3.2.0 =
+= 3.2.1 =
+* (21/05/2013) FIX object caching issue (props arodeus)
 * (20/05/2013) FIX activation issues and rendering bug
-* (20/05/2013) FIX do_shortcode on content (props Xmod08 + MRLR2)
-* (20/05/2013) NEW admin sections / options
-* (20/05/2013) NEW initial test support
+* (10/04/2013) FIX do_shortcode on content (props Xmod08 + MRLR2)
 * (21/05/2013) NEW more/better CSS styling support
-* (21/05/2013) NEW online documentation & code examples
+* (21/04/2013) NEW online documentation & code examples
+* (20/04/2013) NEW admin sections / options
+* (02/02/2013) NEW initial test support
 
 = 3.0.6 =
 * (11/11/2012) FIX Warning on admin Page area. 
@@ -142,8 +143,8 @@ You can download it by SVN client:
 
 == Upgrade Notice ==
 
-= 3.2.0 =
-* (21/05/2013) WARNING: aptools-* CSS classes are deprecated, and will disappear in a future version. Please use page2cat-* classes in your CSS styling. 
+= 3.2.1 =
+* (21/05/2013) DEPRECATION NOTICE: aptools-* CSS classes are deprecated, and will disappear in a future version. Please use page2cat-* classes (or custom classes) in your CSS styling. 
 
 = 3.0.6 =
 * (11/11/2012) FIX warning on admin page area, [showauto] formatting, headers and descriptions.
