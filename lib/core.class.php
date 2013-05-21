@@ -3,12 +3,12 @@
 if ( ! array_key_exists( 'swer-page2cat-core', $GLOBALS ) ) { 
  class Page2Cat_Core {
 
-  function do_excerpt( $content ){
+  static function do_excerpt( $content ){
     return wp_trim_excerpt( $content );
   }
 
 
-  function do_header( $text, $level = '2', $class = 'aptools-single-header page2cat-single-header' ){
+  static function do_header( $text, $level = '2', $class = 'aptools-single-header page2cat-single-header' ){
     if ( $text === null )
       return '';
 
@@ -17,18 +17,18 @@ if ( ! array_key_exists( 'swer-page2cat-core', $GLOBALS ) ) {
     return $hopen . $text . $hclose;
   }
 
-  function do_content( $text, $class = 'aptools-content page2cat-content' ){
+  static function do_content( $text, $class = 'aptools-content page2cat-content' ){
     $copen = '<div class="'.$class.'">';
     $cclose = '</div>';
     return $copen . do_shortcode( $text ) . $cclose;
   }
 
-  function do_wrapper( $content, $class = 'aptools-wrapper page2cat-wrapper' ){
+  static function do_wrapper( $content, $class = 'aptools-wrapper page2cat-wrapper' ){
     $output = '<div class="'.$class.'">'.$content.'</div>';
     return $output;
   }
 
-  function do_list_item( $post, $excerpt = 'false', $image = 'false', $headerlink = 'true' ){
+  static function do_list_item( $post, $excerpt = 'false', $image = 'false', $headerlink = 'true' ){
     # error_log( json_encode( $post ) ); 
     $size = get_option( 'p2c_list_thumb' );
     if ( $size == 'icon' ) $size = array( 16, 16 );
@@ -40,7 +40,7 @@ if ( ! array_key_exists( 'swer-page2cat-core', $GLOBALS ) ) {
     return $output;
   }
 
-  function shortcode_posts( $args ){
+  static function shortcode_posts( $args ){
     extract(
      shortcode_atts(
       array(
@@ -70,7 +70,7 @@ if ( ! array_key_exists( 'swer-page2cat-core', $GLOBALS ) ) {
    return $output;
   }
 
-  function shortcode_pages( $args, $autoargs = null ){
+  static function shortcode_pages( $args, $autoargs = null ){
     $output = false;
     extract(
      shortcode_atts(
@@ -111,7 +111,7 @@ if ( ! array_key_exists( 'swer-page2cat-core', $GLOBALS ) ) {
    return $output;
   }
 
-  function shortcode_list( $args ){
+  static function shortcode_list( $args ){
     extract(
      shortcode_atts(
       array(

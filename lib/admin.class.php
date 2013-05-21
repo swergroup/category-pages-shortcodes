@@ -67,7 +67,7 @@ if ( ! array_key_exists( 'swer-page2cat-admin', $GLOBALS ) ) {
       $exclude[] = get_post_meta( $ex->ID, 'page2cat_archive_link', true );
    endforeach;
    $to_exclude = ( count( $exclude ) > 0 ) ? join( ',', $exclude ) : null;
-   error_log( $to_exclude );
+   # error_log( $to_exclude );
 
 
    #print_r($selected);
@@ -114,7 +114,7 @@ if ( ! array_key_exists( 'swer-page2cat-admin', $GLOBALS ) ) {
         )
       );
 
-     error_log( count( $others ) );
+     # error_log( count( $others ) );
      if ( count( $others ) > 1 && $others[0]->ID != $post_id )
       return;
 
@@ -124,7 +124,7 @@ if ( ! array_key_exists( 'swer-page2cat-admin', $GLOBALS ) ) {
   }
     
     
-  function category_add_form_fields( $tag ){
+  static function category_add_form_fields( $tag ){
       $args = array(
           'selected'         => 0,
           'echo'             => 0,
@@ -141,7 +141,7 @@ if ( ! array_key_exists( 'swer-page2cat-admin', $GLOBALS ) ) {
       ';
   }
     
-  function category_edit_form_fields( $tag ){
+  static function category_edit_form_fields( $tag ){
    $query_args = array(
        'post_type' => 'page',
        'meta_key' => 'page2cat_archive_link',
@@ -176,7 +176,7 @@ if ( ! array_key_exists( 'swer-page2cat-admin', $GLOBALS ) ) {
     wp_reset_postdata();
   }
     
-  function admin_action_editedtag(){
+  static function admin_action_editedtag(){
    if ( $_POST['page2cat_pre_page_id'] !== $_POST['page2cat_page_id'] ):
      update_post_meta( $_POST['page2cat_pre_page_id'], 'page2cat_archive_link', '' );
      update_post_meta( $_POST['page2cat_page_id'], 'page2cat_archive_link', $_POST['tag_ID'] );
@@ -184,12 +184,12 @@ if ( ! array_key_exists( 'swer-page2cat-admin', $GLOBALS ) ) {
   }
     
     
-  function add_post_tag_columns( $columns ){
+  static function add_post_tag_columns( $columns ){
     $columns['page2cat'] = 'Page';
     return $columns;
   }
     
-  function add_post_tag_column_content( $content, $column_name, $id ){
+  static function add_post_tag_column_content( $content, $column_name, $id ){
     $query_args = array(
         'post_type' => 'page',
         'meta_key' => 'page2cat_archive_link',
@@ -210,7 +210,7 @@ if ( ! array_key_exists( 'swer-page2cat-admin', $GLOBALS ) ) {
   }
 
 
-  function filter_the_content( $content ){
+  static function filter_the_content( $content ){
     return $content;
   }
 

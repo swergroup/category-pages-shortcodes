@@ -4,7 +4,7 @@ if ( ! array_key_exists( 'swer-page2cat-shortcodes', $GLOBALS ) )
 { 
  class Page2catShortcodes extends Page2cat_Core {
 
-  function showsingle( $atts ){
+  static function showsingle( $atts ){
     global $post;
     $clean = $output = false;
 
@@ -44,7 +44,7 @@ if ( ! array_key_exists( 'swer-page2cat-shortcodes', $GLOBALS ) )
   }
 
 
-  function showlist( $atts ){
+  static function showlist( $atts ){
     $clean = $output = false;
 
     extract(
@@ -75,7 +75,7 @@ if ( ! array_key_exists( 'swer-page2cat-shortcodes', $GLOBALS ) )
   }
 
     
-  function showauto(){
+  static function showauto(){
    global $cat;
    $query_args = array(
        'post_type' => 'page',

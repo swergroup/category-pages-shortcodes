@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Category Pages & Posts Shortcodes
+Plugin Name: Page2Cat: Category Pages & Posts Shortcodes
 Plugin URI: http://wordpress.org/extend/plugins/page2cat/
 Description: Display posts/pages content (or lists of posts) with handy shortcodes, and map categories to pages directly in the admin area.
 Version: 3.2.1
@@ -62,9 +62,9 @@ register_uninstall_hook( __FILE__, 'page2cat_uninstall' );
 // activating the default values
 function page2cat_activate() {
  // <3.0 cleaning
- if ( version_compare( $wp_version, '3.5.1', '<' ) ) {
+ if ( version_compare( $wp_version, '3.5', '<' ) ) {
      deactivate_plugins( __FILE__ );
-     wp_die( __( 'Page2cat requires WordPress 3.5.1 or newer.', 'page2cat' ), __( 'Please upgrade your Wordpress.', 'page2cat' ) );
+     wp_die( __( 'Page2cat requires WordPress 3.5 or newer.', 'page2cat' ), __( 'Please upgrade your Wordpress.', 'page2cat' ) );
  }
 
  delete_option( 'pixline_page2cat_version' );
