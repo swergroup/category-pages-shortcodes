@@ -3,7 +3,7 @@
 if ( ! array_key_exists( 'swer-page2cat-admin', $GLOBALS ) ) { 
  class Page2CatAdmin extends Page2Cat_Core{
 
-  function add_meta_boxes(){
+  static function add_meta_boxes(){
     if ( !defined( 'SWER_PHPUNIT' ) )
      add_meta_box( 'page2cat_archive_link', 'Category Pages & Posts', array( 'Page2CatAdmin', 'page2cat_custom_metabox' ), 'page', 'side', 'core' );        
   }
@@ -16,7 +16,7 @@ if ( ! array_key_exists( 'swer-page2cat-admin', $GLOBALS ) ) {
   }
 
 
-  function admin_init() {
+  static function admin_init() {
    add_settings_section( 'page2cat', 'Page2cat: Category, Pages & Posts Shortcodes', array( 'Page2CatAdmin', 'settings_section' ), 'reading' );
    add_settings_field( 'p2c_list_thumb', '[showlist] thumbnail size', array( 'Page2CatAdmin', 'field_p2c_list_thumb' ), 'reading', 'page2cat', array( 'label_for' => 'p2c_list_thumb') );
    register_setting( 'reading', 'p2c_list_thumb', array( 'Page2CatAdmin', 'validate_settings' ) );
@@ -39,15 +39,15 @@ if ( ! array_key_exists( 'swer-page2cat-admin', $GLOBALS ) ) {
   }
 
 
-  function manage_pages_columns( $post_columns ){
+  static function manage_pages_columns( $post_columns ){
       $post_columns['page2cat'] = 'Category';
       return $post_columns;
   }
   
-  function manage_pages_custom_column( $column, $post_id ){
+  static function manage_pages_custom_column( $column, $post_id ){
       $selected = (int) get_post_meta( $post_id, 'page2cat_archive_link', true );        
       
-  	$category = &get_category( $selected );
+  	$category = get_category( $selected );
   	if ( is_wp_error( $category ) ) return false;
 
    if ( $category ):
@@ -58,8 +58,18 @@ if ( ! array_key_exists( 'swer-page2cat-admin', $GLOBALS ) ) {
    endif;
   }
     
-  function page2cat_custom_metabox( $post ){
+  static function page2cat_custom_metabox( $post ){
    $selected = get_post_meta( $post->ID, 'page2cat_archive_link', true );
+
+   $others = get_posts( array( 'post_type' => 'page', 'meta_key' => 'page2cat_archive_link' ) );
+   foreach ( $others as $ex ):
+      $ids[] = $ex->ID;
+      $exclude[] = get_post_meta( $ex->ID, 'page2cat_archive_link', true );
+   endforeach;
+   $to_exclude = ( count( $exclude ) > 0 ) ? join( ',', $exclude ) : null;
+   error_log( $to_exclude );
+
+
    #print_r($selected);
    wp_nonce_field( plugin_basename( __FILE__ ), 'page2cat-nonce' );
    
@@ -68,18 +78,20 @@ if ( ! array_key_exists( 'swer-page2cat-admin', $GLOBALS ) ) {
        'show_count'        => 0,
        'hide_empty'        => 1,
        'hierarchical'      => 1,
-       'show_option_none' => '(None)',
+       'exclude'           => $to_exclude,
+       'show_option_none'  => '(None)',
        'name'              => 'page2cat-metabox',
        'id'                => 'page2cat-metabox',
        'taxonomy'          => 'category',
    );
    wp_dropdown_categories( $args );      
-   echo '<p>Link this page to a category, and use [showauto] shortcode in your category template to embed that page.</p>';
+   echo '<p>Link this page to a category, display in your category template with the <a href="http://dev.swergroup.com/pages-and-posts-shortcodes/wiki/showauto"><em>[showauto]</em> shortcode</a>.</p>';
   }
     
     
   // update logic, same for manage_posts_custom_columns
-  function save_post( $post_id ){
+  static function save_post( $post_id ){
+   global $wp, $wpdb;
    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) 
    return;
 
@@ -93,7 +105,21 @@ if ( ! array_key_exists( 'swer-page2cat-admin', $GLOBALS ) ) {
           return;
    }
    if ( $_POST ):
+    if ( isset( $_POST['page2cat-metabox'] ) ):
+      $others = get_posts(
+       array(
+       'post_type' => 'page',
+       'meta_key' => 'page2cat_archive_link',
+       'posts_per_page' => 10,
+        )
+      );
+
+     error_log( count( $others ) );
+     if ( count( $others ) > 1 && $others[0]->ID != $post_id )
+      return;
+
      update_post_meta( $post_id, 'page2cat_archive_link', $_POST['page2cat-metabox'] );
+    endif;
    endif;
   }
     
@@ -122,10 +148,8 @@ if ( ! array_key_exists( 'swer-page2cat-admin', $GLOBALS ) ) {
        'meta_value' => $tag->term_id,
        'posts_per_page' => 1,
    );
-   
    $selected = 0;
    $pages = new WP_Query( $query_args );
-
    if ( $pages->have_posts() ) :
     while ( $pages->have_posts() ):
         $pages->the_post();       

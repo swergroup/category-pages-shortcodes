@@ -2,8 +2,8 @@
 Contributors: swergroup, pixline
 Donate link: http://swergroup.com
 Tags: category, categories, pages, posts, page, post, shortcode, shortcodes, list, archives, relations, page2cat, swer
-Requires at least: 3.5.1
-Tested up to: 3.5.1
+Requires at least: 3.5
+Tested up to: master
 Stable tag: trunk
 
 Useful shortcodes to display a post or page content or a list of posts.
@@ -50,6 +50,7 @@ You can find this and more info on the [official wiki](http://dev.swergroup.com/
 `[showlist catid="<category_ID>" length="<number_of_posts>"]`
 
 where category_ID is your category number and number_of_posts is a number higher than your category posts count.
+Again, you can find this and more info on the [official wiki](http://dev.swergroup.com/pages-and-posts-shortcodes/wiki/Home).
 
 = Where is the last pre 3.0 version? =
 
