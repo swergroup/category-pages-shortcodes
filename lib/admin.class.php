@@ -8,9 +8,18 @@ if ( ! array_key_exists( 'swer-page2cat-admin', $GLOBALS ) ) {
      add_meta_box( 'page2cat_archive_link', 'Category Pages & Posts', array( 'Page2CatAdmin', 'page2cat_custom_metabox' ), 'page', 'side', 'core' );        
   }
 
+
+  function validate_settings( $input ){
+    $opts = get_option( 'p2c_list_thumb' );
+    $opts = trim( $input );
+    return $opts;
+  }
+
+
   function admin_init() {
-   add_settings_section( 'page2cat', 'Plugin: Category, Pages & Posts Shortcodes', array( 'Page2CatAdmin', 'settings_section' ), 'reading' );
-   add_settings_field( 'p2c_template', 'Post snippet template', array( 'Page2CatAdmin', 'field_1' ), 'reading', 'page2cat', array( 'label_for' => 'p2c_template') );
+   add_settings_section( 'page2cat', 'Page2cat: Category, Pages & Posts Shortcodes', array( 'Page2CatAdmin', 'settings_section' ), 'reading' );
+   add_settings_field( 'p2c_list_thumb', '[showlist] thumbnail size', array( 'Page2CatAdmin', 'field_p2c_list_thumb' ), 'reading', 'page2cat', array( 'label_for' => 'p2c_list_thumb') );
+   register_setting( 'reading', 'p2c_list_thumb', array( 'Page2CatAdmin', 'validate_settings' ) );
   }
 
 
@@ -18,8 +27,15 @@ if ( ! array_key_exists( 'swer-page2cat-admin', $GLOBALS ) ) {
    _e( 'Category, Pages & Posts Shortcodes settings!' );
   }
 
-  function field_1(){
-   _e( '<textarea name="p2c_template" id="p2c_template" class="" rows="4" cols="80"></textarea>' );
+  function field_p2c_list_thumb(){
+    $opt = get_option( 'p2c_list_thumb' );
+    $sizes = apply_filters( 'image_size_names_choose', array( 'icon' => __( '16x16 Icon' ), 'thumbnail' => __( 'Thumbnail' ), 'medium' => __( 'Medium' ), 'large' => __( 'Large' ), 'full' => __( 'Full Size' ) ) );
+   _e( '<select name="p2c_list_thumb" id="p2c_list_thumb">' );
+   foreach ( $sizes as $key => $size ):
+      $selected = ( $key === $opt ) ? 'selected="selected"' : null;
+      _e( '<option value="'.$key.'" '.$selected.'>'.$size.'</option>' );
+   endforeach;
+
   }
 
 
@@ -69,7 +85,6 @@ if ( ! array_key_exists( 'swer-page2cat-admin', $GLOBALS ) ) {
 
    if ( !isset($_POST[ 'page2cat-nonce' ]) || !wp_verify_nonce( $_POST[ 'page2cat-nonce' ], plugin_basename( __FILE__ ) ) )
    return;
-   
    if ( 'page' == $_POST['post_type'] ){
       if ( !current_user_can( 'edit_page', $post_id ) )
           return;
@@ -77,7 +92,6 @@ if ( ! array_key_exists( 'swer-page2cat-admin', $GLOBALS ) ) {
       if ( !current_user_can( 'edit_post', $post_id ) )
           return;
    }
-     
    if ( $_POST ):
      update_post_meta( $post_id, 'page2cat_archive_link', $_POST['page2cat-metabox'] );
    endif;
@@ -159,7 +173,8 @@ if ( ! array_key_exists( 'swer-page2cat-admin', $GLOBALS ) ) {
         'posts_per_page' => 1,
     );
 
-    $pages = new WP_Query( $query_args );
+   $pages = new WP_Query( $query_args );
+
    if ( $pages->have_posts() ):
     while ( $pages->have_posts() ):
         $pages->the_post();       

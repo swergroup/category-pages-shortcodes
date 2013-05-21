@@ -30,8 +30,11 @@ if ( ! array_key_exists( 'swer-page2cat-core', $GLOBALS ) ) {
 
   function do_list_item( $post, $excerpt = 'false', $image = 'false', $headerlink = 'true' ){
     # error_log( json_encode( $post ) ); 
+    $size = get_option( 'p2c_list_thumb' );
+    if ( $size == 'icon' ) $size = array( 16, 16 );
+
     $title = ( $headerlink === 'true' ) ? '<a href="'.get_permalink( $post->ID ).'">'.$post->post_title.'</a>' : $post->post_title; 
-    $pre = ( $image === 'true' ) ? get_the_post_thumbnail( $post->ID, array( 16, 16 ), array( 'class' => 'page2cat-list-icon' ) ) : null;
+    $pre = ( $image === 'true' ) ? get_the_post_thumbnail( $post->ID, $size, array( 'class' => 'page2cat-list-icon' ) ) : null;
     $post = ( $excerpt === 'true' ) ? '<span>' . self::do_excerpt( $post->post_content ) . '</span>' : null;
     $output = '<li> ' . $pre . ' ' . $title . ' ' . $post . ' </li>';
     return $output;

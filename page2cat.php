@@ -81,13 +81,6 @@ function page2cat_activate() {
  delete_option( 'p2c_thumbnail_size' );
  delete_option( 'p2c_use_img' );
 
- $default_options = array(
-     'version'   => SWER_CURRENT_VERSION,
-     'template'  => array(),
-     'shortcode' => array()
- );
-     
- add_option( 'page2cat_options', json_encode( $default_options ) );
 }
 
 function page2cat_deactivate() {
