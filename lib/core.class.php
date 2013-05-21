@@ -51,7 +51,8 @@ if ( ! array_key_exists( 'swer-page2cat-core', $GLOBALS ) ) {
    return $output;
   }
 
-  function shortcode_pages( $args ){
+  function shortcode_pages( $args, $autoargs = null ){
+    $output = false;
     extract(
      shortcode_atts(
       array(
@@ -68,22 +69,31 @@ if ( ! array_key_exists( 'swer-page2cat-core', $GLOBALS ) ) {
      )
     );
 
-   $output = '';
-   #$args = array( 'p' => $postid );
-   $page = get_page( $pageid );
-   # error_log( json_encode( $page ) ); die();
-   if ( isset( $page->ID ) ):
-     if ( $showheader === 'true' ) $output .= self::do_header( $page->post_title, $header, $headerclass );
-     if ( $content === 'true' ) $output .= self::do_content( $page->post_content, $contentclass );
-     if ( $wrapper !== 'false' ) $output = self::do_wrapper( $output, $wrapperclass );
+   if ( !isset( $autoargs ) ):
+    $output = '';
+    #$args = array( 'p' => $postid );
+    $page = get_page( $pageid );
+    # error_log( json_encode( $page ) ); die();
+    if ( isset( $page->ID ) ):
+      if ( $showheader === 'true' ) $output .= self::do_header( $page->post_title, $header, $headerclass );
+      if ( $content === 'true' ) $output .= self::do_content( $page->post_content, $contentclass );
+      if ( $wrapper !== 'false' ) $output = self::do_wrapper( $output, $wrapperclass );
+    endif;
+
+   elseif ( isset( $autoargs ) && is_array( $autoargs ) ) :
+    $pagehead = get_pages( $autoargs );
+    if ( isset( $pagehead[0]->ID ) ):
+      if ( $showheader === 'true' ) $output .= self::do_header( $pagehead[0]->post_title, '1', 'aptools-auto-header page2cat-auto-header' );
+      if ( $content === 'true' ) $output .= self::do_content( $pagehead[0]->post_content, 'aptools-auto-content page2cat-auto-content' );
+      if ( $wrapper !== 'false' ) $output = self::do_wrapper( $output, $wrapperclass );
+    endif;
    endif;
-   wp_reset_postdata();
+   wp_reset_postdata();                
    return $output;
   }
 
-
-
  }
+
 
  if ( class_exists( 'Page2cat_Core' ) ):
   $page2cat_core = new Page2cat_Core();

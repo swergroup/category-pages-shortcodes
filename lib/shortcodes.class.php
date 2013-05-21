@@ -39,7 +39,6 @@ if ( ! array_key_exists( 'swer-page2cat-shortcodes', $GLOBALS ) )
    endif;
 
     _e( $output );
-
     $clean = ob_get_clean();
     return $clean;
   }
@@ -99,13 +98,24 @@ if ( ! array_key_exists( 'swer-page2cat-shortcodes', $GLOBALS ) )
    global $cat;
    $query_args = array(
        'post_type' => 'page',
-       'meta_key' => 'aptools_archive_link',
+       'post_status' => 'publish',
+       'meta_key' => 'page2cat_archive_link',
        'meta_value' => $cat,
        'posts_per_page' => 1,
    );
 
-   $pages = new WP_Query( $query_args );
+   $defaults = array(
+      'showheader' => 'true',
+      'header' => '2',
+      'headerclass' => 'aptools-single-header page2cat-single-header',
+      'content' => 'true',
+      'contentclass' => 'aptools-content page2cat-content',
+      'wrapper' => 'false',
+      'wrapperclass' => 'aptools-wrapper page2cat-wrapper',
+    );
 
+   /*
+   $pages = new WP_Query( $query_args );
    if ( $pages->have_posts() ):
     while ( $pages->have_posts() ):
         $pages->the_post();
@@ -114,7 +124,13 @@ if ( ! array_key_exists( 'swer-page2cat-shortcodes', $GLOBALS ) )
     endwhile;
    endif;
    wp_reset_postdata();                
+   */
 
+   ob_start();
+   $output = self::shortcode_pages( $defaults, $query_args );
+   _e( $output );
+   $clean = ob_get_clean();
+   return $clean;
   }
  }
 
