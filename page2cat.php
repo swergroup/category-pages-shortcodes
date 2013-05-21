@@ -32,8 +32,8 @@ License: GPL2
 define( 'SWER_PUGIN_NAME', 'Category Pages & Posts Shortcodes' );
 define( 'SWER_PLUGIN_DIRECTORY', 'page2cat' );
 define( 'SWER_CURRENT_VERSION', '3.2.1' );
-define( 'SWER_LOGPATH', str_replace( '\\', '/', WP_CONTENT_DIR ).'/swer-logs/' );
 define( 'SWER_I18N_DOMAIN', 'page2cat' );
+#define( 'SWER_LOGPATH', str_replace( '\\', '/', WP_CONTENT_DIR ).'/swer-logs/' );
 
 
 include( __DIR__ . '/lib/core.class.php' );

@@ -3,6 +3,10 @@
 if ( ! array_key_exists( 'swer-page2cat-core', $GLOBALS ) ) { 
  class Page2Cat_Core {
 
+  function do_excerpt( $content ){
+    return wp_trim_excerpt( $content );
+  }
+
 
   function do_header( $text, $level = '2', $class = 'aptools-single-header page2cat-single-header' ){
     if ( $text === null )
@@ -28,7 +32,7 @@ if ( ! array_key_exists( 'swer-page2cat-core', $GLOBALS ) ) {
     # error_log( json_encode( $post ) ); 
     $title = ( $headerlink === 'true' ) ? '<a href="'.get_permalink( $post->ID ).'">'.$post->post_title.'</a>' : $post->post_title; 
     $pre = ( $image === 'true' ) ? get_the_post_thumbnail( $post->ID, array( 16, 16 ), array( 'class' => 'page2cat-list-icon' ) ) : null;
-    $post = ( $excerpt === 'true' ) ? '<span>' . get_the_excerpt() . '</span>' : null;
+    $post = ( $excerpt === 'true' ) ? '<span>' . self::do_excerpt( $post->post_content ) . '</span>' : null;
     $output = '<li> ' . $pre . ' ' . $title . ' ' . $post . ' </li>';
     return $output;
   }
@@ -109,6 +113,7 @@ if ( ! array_key_exists( 'swer-page2cat-core', $GLOBALS ) ) {
      shortcode_atts(
       array(
       'catid' => '',
+      'link' => 'true',
       'length' => '10',
       'listclass' => 'aptools-list page2cat-list',
       'showheader' => 'true',
@@ -117,7 +122,6 @@ if ( ! array_key_exists( 'swer-page2cat-core', $GLOBALS ) ) {
       'headerclass' => 'aptools-list-header page2cat-list-header',
       'excerpt' => 'false',
       'image' => 'false',
-      'link' => 'true',
       'wrapper' => 'false',
       'wrapperclass' => 'aptools-wrapper page2cat-wrapper',
       ),
@@ -130,9 +134,11 @@ if ( ! array_key_exists( 'swer-page2cat-core', $GLOBALS ) ) {
     $posts = get_posts( array( 'posts_per_page' => $length, 'numberposts' => $length, 'category' => $catid ) );
 
     if ( $showheader === 'true' ) $output .= self::do_header( $headertext, $header, $headerclass );
+    $output .= ' <ul class="'.$listclass.'"> ';
     foreach ( $posts as $key => $post ):
       $output .= self::do_list_item( $post, $excerpt, $image, $link );
     endforeach;
+    $output .= ' </ul> ';
     if ( $wrapper !== 'false' ) $output = self::do_wrapper( $output, $wrapperclass );
    endif;
    wp_reset_postdata();
