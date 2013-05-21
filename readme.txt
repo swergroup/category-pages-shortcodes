@@ -6,7 +6,7 @@ Requires at least: 3.5
 Tested up to: master
 Stable tag: trunk
 
-Useful shortcodes to display a post or page content or a list of posts.
+Useful shortcodes to display a post or page content or a list of posts. 100.000 downloads!
 
 == Description ==
 
@@ -19,6 +19,7 @@ You can safely use shortcodes inside a post or a page, you can embed them in you
 using the [do_shortcode](http://codex.wordpress.org/Function_Reference/do_shortcode) WordPress function, like that:
 
 `<?php do_shortcode('[showsingle <options>"]'); ?>`
+
 
 * [Documentation and usage examples](http://dev.swergroup.com/pages-and-posts-shortcodes)
 * [Support Forum](http://wordpress.org/support/plugin/page2cat)
@@ -101,6 +102,7 @@ You can download it with a SVN client:
 
 = 3.2.1 =
 * (21/05/2013) DEPRECATION NOTICE: aptools-* CSS classes are deprecated, and will disappear in a future version. Please use page2cat-* classes (or custom classes) in your CSS styling. 
+* (21/05/2013) 100.000 downloads celebration release!
 
 = 3.0.6 =
 * (11/11/2012) FIX warning on admin page area, [showauto] formatting, headers and descriptions.
