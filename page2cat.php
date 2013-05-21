@@ -30,13 +30,19 @@ License: GPL2
 ?><?php
 
 define( 'SWER_PUGIN_NAME', 'Category Pages & Posts Shortcodes' );
-define( 'SWER_PLUGIN_DIRECTORY', 'aptools' );
+define( 'SWER_PLUGIN_DIRECTORY', 'page2cat' );
 define( 'SWER_CURRENT_VERSION', '3.2.0' );
 define( 'SWER_LOGPATH', str_replace( '\\', '/', WP_CONTENT_DIR ).'/swer-logs/' );
-define( 'SWER_I18N_DOMAIN', 'aptools' );
+define( 'SWER_I18N_DOMAIN', 'page2cat' );
+
+
+include( __DIR__ . '/lib/core.class.php' );
+include( __DIR__ . '/lib/admin.class.php' );
+include( __DIR__ . '/lib/shortcodes.class.php' );
+
 
 // load language files
-function aptools_set_lang_file() {
+function page2cat_set_lang_file() {
 	# set the language file
 	$currentLocale = get_locale();
 	if ( !empty( $currentLocale ) ) {
@@ -46,22 +52,22 @@ function aptools_set_lang_file() {
 		}
 	}
 }
-aptools_set_lang_file();
+page2cat_set_lang_file();
 
 
-register_activation_hook( __FILE__, 'aptools_activate' );
-register_deactivation_hook( __FILE__, 'aptools_deactivate' );
-register_uninstall_hook( __FILE__, 'aptools_uninstall' );
+register_activation_hook( __FILE__, 'page2cat_activate' );
+register_deactivation_hook( __FILE__, 'page2cat_deactivate' );
+register_uninstall_hook( __FILE__, 'page2cat_uninstall' );
 
 // activating the default values
-function aptools_activate() {
+function page2cat_activate() {
  // <3.0 cleaning
  if ( version_compare( $wp_version, '3.5.1', '<' ) ) {
      deactivate_plugins( __FILE__ );
      wp_die( __( 'Page2cat requires WordPress 3.5.1 or newer.', 'page2cat' ), __( 'Please upgrade your Wordpress.', 'page2cat' ) );
  }
 
- delete_option( 'pixline_aptools_version' );
+ delete_option( 'pixline_page2cat_version' );
  delete_option( 'p2c_use_empty' );
  delete_option( 'p2c_show_used_pages' );
  delete_option( 'p2c_catlist_limit' );
@@ -81,22 +87,16 @@ function aptools_activate() {
      'shortcode' => array()
  );
      
- add_option( 'aptools_options', json_encode( $default_options ) );
+ add_option( 'page2cat_options', json_encode( $default_options ) );
 }
 
-// deactivating
-function aptools_deactivate() {
-	// needed for proper deletion of every option
-	delete_option( 'aptools_options' );
+function page2cat_deactivate() {
+	delete_option( 'page2cat_options' );
 }
 
 // uninstalling
-function aptools_uninstall() {
-	# delete all data stored
-	delete_option( 'aptools_options' );
-	// delete log files and folder only if needed
-	if (function_exists( 'aptools_deleteLogFolder' ) ) aptools_deleteLogFolder();
+function page2cat_uninstall() {
+	delete_option( 'page2cat_options' );
+	if (function_exists( 'page2cat_deleteLogFolder' ) ) page2cat_deleteLogFolder();
 }
 
-
-include( 'page2cat.class.php' );

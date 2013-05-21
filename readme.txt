@@ -116,6 +116,8 @@ You can download it by SVN client:
 * (20/05/2013) FIX do_shortcode on content (props Xmod08 + MRLR2)
 * (20/05/2013) NEW admin sections / options
 * (20/05/2013) NEW initial test support
+* (21/05/2013) NEW more/better CSS styling support
+* (21/05/2013) NEW online documentation & code examples
 
 = 3.0.6 =
 * (11/11/2012) FIX Warning on admin Page area. 
@@ -139,6 +141,9 @@ You can download it by SVN client:
 * (30/10/2012) Complete rewrite for WordPress 3.4+
 
 == Upgrade Notice ==
+
+= 3.2.0 =
+* (21/05/2013) WARNING: aptools-* CSS classes are deprecated, and will disappear in a future version. Please use page2cat-* classes in your CSS styling. 
 
 = 3.0.6 =
 * (11/11/2012) FIX warning on admin page area, [showauto] formatting, headers and descriptions.
