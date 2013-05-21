@@ -78,7 +78,7 @@ class Page2cat_Admin extends WP_UnitTestCase {
 
  function test_hook_manage_pages_columns(){
   $post_columns = array();
-  $this->assertEquals( 0, count( $columns ),'Pages columns, first count' );
+  $this->assertEquals( 0, count( $post_columns ),'Pages columns, first count' );
 
   $columns2 = $this->plugin->manage_pages_columns( $post_columns );
   $this->assertEquals( 1, count( $columns2 ), 'Pages columns, second count' );

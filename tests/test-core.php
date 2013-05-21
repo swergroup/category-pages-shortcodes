@@ -45,25 +45,32 @@ class Page2cat_Core_Test extends WP_UnitTestCase {
  function test_shortcode_posts(){
   $postID = wp_insert_post( array( 'post_title' => 'title', 'post_content' => 'content content content', 'post_status' => 'publish' ) );
 
-  $short1 = $this->plugin->shortcode_posts( $postID );
+  $args1 = array( 'postid' => $postID );
+  $short1 = $this->plugin->shortcode_posts( $args1 );
   $this->assertEquals( $short1, '<h2 class="aptools-single-header page2cat-single-header">title</h2><div class="aptools-content page2cat-content">content content content</div>' );
 
-  $short2 = $this->plugin->shortcode_posts( $postID, 'false' );
+  $args2 = array( 'postid' => $postID, 'showheader' => 'false' );
+  $short2 = $this->plugin->shortcode_posts( $args2 );
   $this->assertEquals( $short2, '<div class="aptools-content page2cat-content">content content content</div>' );
 
-  $short3 = $this->plugin->shortcode_posts( $postID, 'true', '3', 'header-class' );
+  $args3 = array( 'postid' => $postID, 'showheader' => 'true', 'header' => '3', 'headerclass' => 'header-class' );
+  $short3 = $this->plugin->shortcode_posts( $args3 );
   $this->assertEquals( $short3, '<h3 class="header-class">title</h3><div class="aptools-content page2cat-content">content content content</div>' );
 
-  $short4 = $this->plugin->shortcode_posts( $postID, 'true', '2', 'header-class-2', 'false' );
+  $args4 = array( 'postid' => $postID, 'showheader' => 'true', 'header' => '2', 'headerclass' => 'header-class-2', 'content' => 'false' );
+  $short4 = $this->plugin->shortcode_posts( $args4 );
   $this->assertEquals( $short4, '<h2 class="header-class-2">title</h2>' );
 
-  $short5 = $this->plugin->shortcode_posts( $postID, 'true', '4', 'header-class-3', 'true', 'content-class' );
+  $args5 = array( 'postid' => $postID, 'showheader' => 'true', 'header' => '4', 'headerclass' => 'header-class-3', 'content' => 'true', 'contentclass' => 'content-class' );
+  $short5 = $this->plugin->shortcode_posts( $args5 );
   $this->assertEquals( $short5, '<h4 class="header-class-3">title</h4><div class="content-class">content content content</div>' );
 
-  $short6 = $this->plugin->shortcode_posts( $postID, 'true', '6', 'header-class-4', 'true', 'content-class', 'true' );
+  $args6 = array( 'postid' => $postID, 'showheader' => 'true', 'header' => '6', 'headerclass' => 'header-class-4', 'content' => 'true', 'contentclass' => 'content-class', 'wrapper' => 'true' );
+  $short6 = $this->plugin->shortcode_posts( $args6 );
   $this->assertEquals( $short6, '<div class="aptools-wrapper page2cat-wrapper"><h6 class="header-class-4">title</h6><div class="content-class">content content content</div></div>' );
 
-  $short7 = $this->plugin->shortcode_posts( $postID, 'true', '5', 'header-class-5', 'true', 'content-class', 'true', 'wrapper-class' );
+  $args7 = array( 'postid' => $postID, 'showheader' => 'true', 'header' => '5', 'headerclass' => 'header-class-5', 'content' => 'true', 'contentclass' => 'content-class', 'wrapper' => 'true', 'wrapperclass' => 'wrapper-class' );
+  $short7 = $this->plugin->shortcode_posts( $args7 );
   $this->assertEquals( $short7, '<div class="wrapper-class"><h5 class="header-class-5">title</h5><div class="content-class">content content content</div></div>' );
 
 }

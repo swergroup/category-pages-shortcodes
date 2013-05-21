@@ -17,21 +17,37 @@ if ( ! array_key_exists( 'swer-page2cat-core', $GLOBALS ) ) {
   }
 
   function do_wrapper( $content, $class = 'aptools-wrapper page2cat-wrapper' ){
-    $output .= '<div class="'.$class.'">'.$content.'</div>';
+    $output = '<div class="'.$class.'">'.$content.'</div>';
     return $output;
   }
 
-  function shortcode_posts( $postid, $showheader = 'true', $header = '2', $headerclass = 'aptools-single-header page2cat-single-header', $content = 'true', $contentclass = 'aptools-content page2cat-content', $wrapper = 'false', $wrapperclass = 'aptools-wrapper page2cat-wrapper' ){
-   global $wpdb;
+  function shortcode_posts( $args ){
+    extract(
+     shortcode_atts(
+      array(
+      'postid' => '',
+      'showheader' => 'true',
+      'header' => '2',
+      'headerclass' => 'aptools-single-header page2cat-single-header',
+      'content' => 'true',
+      'contentclass' => 'aptools-content page2cat-content',
+      'wrapper' => 'false',
+      'wrapperclass' => 'aptools-wrapper page2cat-wrapper',
+      ),
+      $args
+     )
+    );
+
    $output = '';
    #$args = array( 'p' => $postid );
    $page = get_post( $postid );
    # error_log( json_encode( $page ) ); die();
-   if ( isset( $page ) ):
+   if ( isset( $page->ID ) ):
      if ( $showheader === 'true' ) $output .= self::do_header( $page->post_title, $header, $headerclass );
      if ( $content === 'true' ) $output .= self::do_content( $page->post_content, $contentclass );
      if ( $wrapper !== 'false' ) $output = self::do_wrapper( $output, $wrapperclass );
    endif;
+   wp_reset_postdata();
    return $output;
   }
 

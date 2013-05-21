@@ -5,6 +5,8 @@ if ( ! array_key_exists( 'swer-page2cat-shortcodes', $GLOBALS ) )
  class Page2catShortcodes extends Page2cat_Core {
 
   function showsingle( $atts ){
+    $output = '';
+
     extract(
      shortcode_atts(
       array(
@@ -22,39 +24,21 @@ if ( ! array_key_exists( 'swer-page2cat-shortcodes', $GLOBALS ) )
      )
     );
 
-   /*
-   $hopen = '<h'.$header.' class='.$headerclass.'>';
-   $hclose = '</h'.$header.'>';
-   $copen = '<div class='.$contentclass.'>';
-   $cclose = '</div>';
-   $output = '';
+    # print_r( $atts); die();
+   ob_start();
 
-   if ( $postid === '' && $pageid !== '' ) :
-       $args = array( 'page_id' => $pageid, 'posts_per_page' => 1 );
-   elseif ( $pageid === '' && $postid !== '' ) :
-       $args = array( 'p' => $postid, 'posts_per_page' => 1 );
+   if ( !empty( $postid ) && empty( $pageid ) ) :
+    $output = self::shortcode_posts( $atts );
+   elseif ( !empty( $pageid ) && empty( $postid ) ) :
+    $output = self::shortcode_page( $atts );
+   else :
+    $output = false;
    endif;
 
-   $page = new WP_Query( $args );
-   if ( $page->have_posts() ):
-    while ( $page->have_posts() ):
-        $page->the_post();
-        if ( $showheader === 'true' ) $output .= parent::do_header( get_the_title(), $header, $headerclass );
-        if ( $content === 'true' ) $output .= parent::do_content( get_the_content(), $contentclass );
-        if ( $wrapper !== 'false' ) $output = parent::do_wrapper( $output, $wrapperclass );
-    endwhile;
-   endif;
-   wp_reset_postdata();                
-   # error_log( $output );
-   */
+    _e( $output );
 
-   if ( isset( $postid ) && !isset( $pageid ) ) :
-    $output = parent::shortcode_posts( $postid, $showheader, $header, $headerclass, $content, $contentclass, $wrapper, $wrapperclass );
-   elseif ( isset( $pageid ) && !isset( $postid ) ) :
-    $output = parent::shortcode_page( $postid, $showheader, $header, $headerclass, $content, $contentclass, $wrapper, $wrapperclass );
-   endif;
-
-   _e( $output );
+    $clean = ob_get_clean();
+    return $clean;
   }
 
 
