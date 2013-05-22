@@ -1,16 +1,16 @@
 === Page2cat: Category, Pages & Posts Shortcodes ===
 Contributors: swergroup, pixline
-Donate link: http://swergroup.com
+Donate link: https://flattr.com/submit/auto?user_id=swergroup&url=http://wordpress.org/plugins/page2cat/&title=Page2Cat%20WP%20plugin
 Tags: category, categories, pages, posts, page, post, shortcode, shortcodes, list, archives, relations, page2cat, swer
 Requires at least: 3.5
 Tested up to: master
 Stable tag: trunk
+License: GPLv2
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Useful shortcodes to display a post or page content or a list of posts. 100.000 downloads!
 
 == Description ==
-
-[![Build Status (development git master)](https://travis-ci.org/swergroup/category-pages-shortcodes.png?branch=master)](https://travis-ci.org/swergroup/category-pages-shortcodes)
 
 Category Pages & Posts Shortcodes offers helpful shortcodes to display a post or page content, or a list of posts.
 It also allow an exclusive relationship between a Category and a Page, in order to display the page content as "header" of category archives, with a simple php tag.
@@ -24,6 +24,10 @@ using the [do_shortcode](http://codex.wordpress.org/Function_Reference/do_shortc
 * [Documentation and usage examples](http://dev.swergroup.com/pages-and-posts-shortcodes)
 * [Support Forum](http://wordpress.org/support/plugin/page2cat)
 
+* [GitHub repository](https://github.com/swergroup/category-pages-shortcodes)
+* [Build status on Travis CI](https://travis-ci.org/swergroup/category-pages-shortcodes)
+
+* [Flattr this!](https://flattr.com/submit/auto?user_id=swergroup&url=http://wordpress.org/plugins/page2cat/&title=Page2Cat%20WP%20plugin)
 
 GPL2(C) 2008+ [SWER Sviluppo siti internet Torino](http://swergroup.com/sviluppo/siti-internet-torino/)
 
@@ -53,13 +57,6 @@ You can find this and more info on the [official wiki](http://dev.swergroup.com/
 where category_ID is your category number and number_of_posts is a number higher than your category posts count.
 Again, you can find this and more info on the [official wiki](http://dev.swergroup.com/pages-and-posts-shortcodes/wiki/Home).
 
-= Where is the last pre 3.0 version? =
-
-Last pre-3.0 version is 2.6.3, [SVN r367559](http://plugins.trac.wordpress.org/browser/page2cat?rev=367559)
-
-You can download it with a SVN client: 
-
-`svn -r 367559 checkout http://plugins.svn.wordpress.org/page2cat/trunk/ page2cat-2.6.3`
 
 == Screenshots ==
 
