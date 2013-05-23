@@ -45,6 +45,8 @@ if ( ! array_key_exists( 'swer-page2cat-core', $GLOBALS ) ) {
      shortcode_atts(
       array(
       'postid' => '',
+      'post_type' => 'post',
+      'status' => 'publish',
       'showheader' => 'true',
       'header' => '2',
       'headerclass' => 'aptools-single-header page2cat-single-header',
@@ -116,6 +118,9 @@ if ( ! array_key_exists( 'swer-page2cat-core', $GLOBALS ) ) {
      shortcode_atts(
       array(
       'catid' => '',
+      'taxonomy' => '',
+      'post_type' => 'post',
+      'status' => 'publish',
       'link' => 'true',
       'length' => '10',
       'listclass' => 'aptools-list page2cat-list',
@@ -134,16 +139,20 @@ if ( ! array_key_exists( 'swer-page2cat-core', $GLOBALS ) ) {
 
    $output = '';
    if ( isset( $catid ) ):
-    $posts = get_posts( array( 'posts_per_page' => $length, 'numberposts' => $length, 'category' => $catid ) );
-
-    if ( $showheader === 'true' ) $output .= self::do_header( $headertext, $header, $headerclass );
-    $output .= ' <ul class="'.$listclass.'"> ';
-    foreach ( $posts as $key => $post ):
-      $output .= self::do_list_item( $post, $excerpt, $image, $link );
-    endforeach;
-    $output .= ' </ul> ';
-    if ( $wrapper !== 'false' ) $output = self::do_wrapper( $output, $wrapperclass );
+    $posts = get_posts( array( 'posts_per_page' => $length, 'numberposts' => $length, 'category' => $catid, 'post_type' => $post_type) );
+   elseif ( isset( $taxonomy ) ) :
+    $posts = get_posts( array( 'posts_per_page' => $length, 'numberposts' => $length, 'taxonomy' => $taxonomy, 'post_type' => $post_type) );
    endif;
+
+   if ( $showheader === 'true' ) $output .= self::do_header( $headertext, $header, $headerclass );
+   $output .= ' <ul class="'.$listclass.'"> ';
+
+   foreach ( $posts as $key => $post ):
+     $output .= self::do_list_item( $post, $excerpt, $image, $link );
+   endforeach;
+   $output .= ' </ul> ';
+   if ( $wrapper !== 'false' ) $output = self::do_wrapper( $output, $wrapperclass );
+
    wp_reset_postdata();
    return $output;
   }

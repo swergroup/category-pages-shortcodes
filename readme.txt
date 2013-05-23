@@ -62,9 +62,16 @@ Again, you can find this and more info on the [official wiki](http://dev.swergro
 
 == Changelog ==
 
+= 3.3.2 =
+* (23/05/2013) NEW custom post type / taxonomy support
+* (23/05/2013) NEW post status support
+
+= 3.3.1 =
+* (22/05/2013) FIX activation/version issues
+
 = 3.2.1 =
 * (21/05/2013) FIX object caching issue (props arodeus)
-* (20/05/2013) FIX activation issues and rendering bug
+* (20/05/2013) FIX rendering bug
 * (10/04/2013) FIX do_shortcode on content (props Xmod08 + MRLR2)
 * (21/05/2013) NEW more/better CSS styling support
 * (21/04/2013) NEW online documentation & code examples
