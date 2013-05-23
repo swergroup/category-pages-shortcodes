@@ -65,7 +65,7 @@ register_uninstall_hook( __FILE__, 'page2cat_uninstall' );
 // activating the default values
 function page2cat_activate() {
  // <3.0 cleaning
- if ( version_compare( $wp_version, '3.5', '<' ) ) {
+ if ( version_compare( $wp_version, '3.5.0', '<=' ) ) {
      deactivate_plugins( __FILE__ );
      wp_die( __( 'Page2cat requires WordPress 3.5 or newer.', 'page2cat' ), __( 'Please upgrade your Wordpress.', 'page2cat' ) );
  }
