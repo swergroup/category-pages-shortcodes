@@ -3,7 +3,7 @@
 Plugin Name: Page2Cat: Category Pages & Posts Shortcodes
 Plugin URI: http://wordpress.org/extend/plugins/page2cat/
 Description: Display posts/pages content (or lists of posts) with handy shortcodes, and map categories to pages directly in the admin area.
-Version: 3.2.2
+Version: 3.3.0
 Author: SWERgroup
 Author URI: http://swergroup.com/
 License: GPL2
@@ -31,14 +31,17 @@ License: GPL2
 
 define( 'SWER_PUGIN_NAME', 'Category Pages & Posts Shortcodes' );
 define( 'SWER_PLUGIN_DIRECTORY', 'page2cat' );
-define( 'SWER_CURRENT_VERSION', '3.2.2' );
+define( 'SWER_CURRENT_VERSION', '3.3.0' );
 define( 'SWER_I18N_DOMAIN', 'page2cat' );
 #define( 'SWER_LOGPATH', str_replace( '\\', '/', WP_CONTENT_DIR ).'/swer-logs/' );
 
+define( 'P2C_PATH', plugin_dir_path( __FILE__ ) );
+define( 'P2C_URL', plugins_url( 'page2cat' ) );
 
-include( __DIR__ . '/lib/core.class.php' );
-include( __DIR__ . '/lib/admin.class.php' );
-include( __DIR__ . '/lib/shortcodes.class.php' );
+
+include( P2C_PATH . '/lib/core.class.php' );
+include( P2C_PATH . '/lib/admin.class.php' );
+include( P2C_PATH . '/lib/shortcodes.class.php' );
 
 
 // load language files
@@ -55,9 +58,9 @@ function page2cat_set_lang_file() {
 page2cat_set_lang_file();
 
 
-#register_activation_hook( __FILE__, 'page2cat_activate' );
-#register_deactivation_hook( __FILE__, 'page2cat_deactivate' );
-#register_uninstall_hook( __FILE__, 'page2cat_uninstall' );
+register_activation_hook( __FILE__, 'page2cat_activate' );
+register_deactivation_hook( __FILE__, 'page2cat_deactivate' );
+register_uninstall_hook( __FILE__, 'page2cat_uninstall' );
 
 // activating the default values
 function page2cat_activate() {

@@ -23,13 +23,10 @@ using the [do_shortcode](http://codex.wordpress.org/Function_Reference/do_shortc
 
 * [Documentation and usage examples](http://dev.swergroup.com/pages-and-posts-shortcodes)
 * [Support Forum](http://wordpress.org/support/plugin/page2cat)
-
 * [GitHub repository](https://github.com/swergroup/category-pages-shortcodes)
 * [Build status on Travis CI](https://travis-ci.org/swergroup/category-pages-shortcodes)
 
-* [Flattr this!](https://flattr.com/submit/auto?user_id=swergroup&url=http://wordpress.org/plugins/page2cat/&title=Page2Cat%20WP%20plugin)
-
-GPL2(C) 2008+ [SWER Sviluppo siti internet Torino](http://swergroup.com/sviluppo/siti-internet-torino/)
+This plugin is published under GPL2 open source license by [SWER Sviluppo siti internet Torino](http://swergroup.com/sviluppo/siti-internet-torino/). If you find it useful, please [Flattr this!](https://flattr.com/submit/auto?user_id=swergroup&url=http://wordpress.org/plugins/page2cat/&title=Page2Cat%20WP%20plugin)
 
 == Installation ==
 
@@ -96,16 +93,6 @@ Again, you can find this and more info on the [official wiki](http://dev.swergro
 * (30/10/2012) Complete rewrite for WordPress 3.4+
 
 == Upgrade Notice ==
-
-= 3.2.1 =
-* (21/05/2013) DEPRECATION NOTICE: aptools-* CSS classes are deprecated, and will disappear in a future version. Please use page2cat-* classes (or custom classes) in your CSS styling. 
-* (21/05/2013) 100.000 downloads celebration release!
-
-= 3.0.6 =
-* (11/11/2012) FIX warning on admin page area, [showauto] formatting, headers and descriptions.
-
-= 3.0.5 =
-* (11/11/2012) Fix error on the admin Page area. 
 
 = 3.0.3 =
 CAUTION: This plugin requires WordPress 3.4.x, and will **break** your WP 2.5 setup.
