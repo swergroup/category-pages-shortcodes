@@ -67,7 +67,7 @@ function page2cat_activate() {
  global $wp_version;
  if ( version_compare( $wp_version, '3.5', '<=' ) ) {
      deactivate_plugins( __FILE__ );
-     wp_die( __( 'Page2cat requires WordPress 3.5 or newer (yours: '.$wp_version, 'page2cat' ), __( 'Please upgrade your Wordpress.', 'page2cat' ) );
+     wp_die( __( 'Page2cat requires WordPress 3.5 or newer (yours: '.$wp_version.')', 'page2cat' ), __( 'Please upgrade your Wordpress.', 'page2cat' ) );
  }
 
  delete_option( 'pixline_page2cat_version' );
