@@ -158,6 +158,88 @@ if ( ! array_key_exists( 'swer-page2cat-core', $GLOBALS ) ) {
   }
 
 
+  function admin_dropdown_category( $post_ID ){
+   $exclude = array();
+   $selected = get_post_meta( $post_ID, 'page2cat_archive_link', true );
+   $others = get_posts( array( 'post_type' => 'page', 'meta_key' => 'page2cat_archive_link' ) );
+   foreach ( $others as $ex ):
+     $ids[] = $ex->ID;
+     $linked_ID = get_post_meta( $ex->ID, 'page2cat_archive_link', true );
+     if ( $post->ID != $ex->ID ) $exclude[] = $linked_ID;
+   endforeach;
+   $to_exclude = ( count( $exclude ) > 0 ) ? join( ',', $exclude ) : null;
+   # error_log( $to_exclude );
+   #print_r($selected);
+   $args = array(
+    'selected'          => $selected,
+    'show_count'        => 0,
+    'hide_empty'        => 1,
+    'hierarchical'      => 1,
+    'exclude'           => $to_exclude,
+    'show_option_none'  => '(None)',
+    'name'              => 'page2cat-metabox',
+    'id'                => 'page2cat-metabox',
+    'taxonomy'          => 'category',
+    'echo'              => false,
+    );
+   $out = wp_dropdown_categories( $args );
+   wp_reset_postdata();
+   return $out;
+  }
+
+
+  function admin_dropdown_pages( $cat_ID = 0 ){
+   $pre_out = '';
+   $selected = 0;
+   $to_exclude = array();
+
+   if ( $cat_ID != 0 ):
+    $query_args = array(
+       'post_type' => 'page',
+       'meta_key' => 'page2cat_archive_link',
+       'meta_value' => $cat_ID,
+       'posts_per_page' => 1,
+     );
+    $pages = new WP_Query( $query_args );
+    if ( $pages->have_posts() ) :
+     while ( $pages->have_posts() ):
+        $pages->the_post();       
+        # error_log( ' Linked with '.admin_url( 'post.php?post='.get_the_ID().'&action=edit' ) );
+        $selected = get_the_ID();
+     endwhile;
+    endif;
+    $pre_out = '<input type="hidden" name="page2cat_pre_page_id" value="'.$selected  .'" >';
+
+   else :
+    $query_args = array(
+       'post_type' => 'page',
+       'meta_key' => 'page2cat_archive_link',
+       'nopaging' => true,
+     );
+    $pages = new WP_Query( $query_args );
+    if ( $pages->have_posts() ) :
+     while ( $pages->have_posts() ):
+        $pages->the_post();       
+        # error_log( ' Linked with '.admin_url( 'post.php?post='.get_the_ID().'&action=edit' ) );
+        $to_exclude[] = get_the_ID();
+     endwhile;
+    endif;
+    # error_log( json_encode( $to_exclude ) );
+    $excluded = ( count( $to_exclude ) > 0 ) ? join( ',', $to_exclude ) : '';
+   endif;
+
+   $pages_args = array(
+    'selected'          => $selected,
+    'exclude'           => $excluded,
+    'name'              => 'page2cat_page_id',
+    'show_option_none'  => '(None)',
+    'option_none_value' => 0,
+    'echo'              => 0,
+   );
+   $out = wp_dropdown_pages( $pages_args );
+   wp_reset_postdata();
+   return trim( $pre_out . $out );
+  }
 
 
 

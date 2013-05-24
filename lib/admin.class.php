@@ -59,32 +59,10 @@ if ( ! array_key_exists( 'swer-page2cat-admin', $GLOBALS ) ) {
   }
     
   static function page2cat_custom_metabox( $post ){
-   $selected = get_post_meta( $post->ID, 'page2cat_archive_link', true );
-
-   $others = get_posts( array( 'post_type' => 'page', 'meta_key' => 'page2cat_archive_link' ) );
-   foreach ( $others as $ex ):
-      $ids[] = $ex->ID;
-      $exclude[] = get_post_meta( $ex->ID, 'page2cat_archive_link', true );
-   endforeach;
-   $to_exclude = ( count( $exclude ) > 0 ) ? join( ',', $exclude ) : null;
-   # error_log( $to_exclude );
-
-
-   #print_r($selected);
    wp_nonce_field( plugin_basename( __FILE__ ), 'page2cat-nonce' );
    
-   $args = array(
-       'selected'          => $selected,
-       'show_count'        => 0,
-       'hide_empty'        => 1,
-       'hierarchical'      => 1,
-       'exclude'           => $to_exclude,
-       'show_option_none'  => '(None)',
-       'name'              => 'page2cat-metabox',
-       'id'                => 'page2cat-metabox',
-       'taxonomy'          => 'category',
-   );
-   wp_dropdown_categories( $args );      
+   _e( self::admin_dropdown_category( $post->ID ) );
+
    echo '<p>Link this page to a category, display in your category template with the <a href="http://dev.swergroup.com/pages-and-posts-shortcodes/wiki/showauto"><em>[showauto]</em> shortcode</a>.</p>';
   }
     
@@ -125,60 +103,34 @@ if ( ! array_key_exists( 'swer-page2cat-admin', $GLOBALS ) ) {
     
     
   static function category_add_form_fields( $tag ){
-      $args = array(
-          'selected'         => 0,
-          'echo'             => 0,
-          'name'             => 'page2cat_page_id',
-          'show_option_none' => '(None)',
-      );
+    $dropdown = self::admin_dropdown_pages();
+    $dropdown = ( $dropdown == '' ) ? '<p><em>No available page</em></p>' : $dropdown;
           
       echo '
           <div class="form-field">
           	<label for="tag-description">'._x( 'Category Pages & Posts', 'Category Pages & Posts' ).'</label>
-          	'.wp_dropdown_pages( $args ).'
+          	' . $dropdown . '
           	<p>'._( 'Link this category to a page, and use [showauto] shortcode in your category template to embed that page.' ).'</p>
           </div>
       ';
   }
     
   static function category_edit_form_fields( $tag ){
-   $query_args = array(
-       'post_type' => 'page',
-       'meta_key' => 'page2cat_archive_link',
-       'meta_value' => $tag->term_id,
-       'posts_per_page' => 1,
-   );
-   $selected = 0;
-   $pages = new WP_Query( $query_args );
-   if ( $pages->have_posts() ) :
-    while ( $pages->have_posts() ):
-        $pages->the_post();       
-        #echo 'This category is linked with <a href="'.admin_url('post.php?post='.get_the_ID().'&action=edit').'">'.get_the_title().'</a>';
-        $selected = get_the_ID();
-    endwhile;
-   endif;
-    
-    $pages_args = array(
-        'selected'         => $selected,
-        'echo'             => 0,
-        'name'             => 'page2cat_page_id',
-        'show_option_none' => '(None)',
-    );
+    $dropdown = self::admin_dropdown_pages( $tag->term_id );
+
     echo '
-<input type="hidden" name="page2cat_pre_page_id" value="'.$selected  .'" />
 <tr class="form-field">
 <th scope="row" valign="top"><label for="page2cat_page_id">Category Pages & Posts</label></th>
-<td>'.wp_dropdown_pages( $pages_args ).'<br />
+<td>' . $dropdown . '<br />
 <span class="description">Link this category to a page, and use [showauto] shortcode in your category template to embed that page.</span>
 </td>
 </tr>            	
    ';
-    wp_reset_postdata();
   }
     
   static function admin_action_editedtag(){
    if ( $_POST['page2cat_pre_page_id'] !== $_POST['page2cat_page_id'] ):
-     update_post_meta( $_POST['page2cat_pre_page_id'], 'page2cat_archive_link', '' );
+     # update_post_meta( $_POST['page2cat_pre_page_id'], 'page2cat_archive_link', '' );
      update_post_meta( $_POST['page2cat_page_id'], 'page2cat_archive_link', $_POST['tag_ID'] );
    endif;
   }

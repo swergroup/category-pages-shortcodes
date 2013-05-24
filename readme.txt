@@ -15,13 +15,10 @@ Useful shortcodes to display a post or page content or a list of posts. 100.000 
 Category Pages & Posts Shortcodes offers helpful shortcodes to display a post or page content, or a list of posts.
 It also allow an exclusive relationship between a Category and a Page, in order to display the page content as "header" of category archives, with a simple php tag.
 
-You can safely use shortcodes inside a post or a page, you can embed them in your templates or in your sidebar 
-using the [do_shortcode](http://codex.wordpress.org/Function_Reference/do_shortcode) WordPress function, like that:
+[Documentation and usage examples](http://dev.swergroup.com/pages-and-posts-shortcodes)
 
-`<?php do_shortcode('[showsingle <options>"]'); ?>`
+Useful links:
 
-
-* [Documentation and usage examples](http://dev.swergroup.com/pages-and-posts-shortcodes)
 * [Support Forum](http://wordpress.org/support/plugin/page2cat)
 * [GitHub repository](https://github.com/swergroup/category-pages-shortcodes)
 * [Build status on Travis CI](https://travis-ci.org/swergroup/category-pages-shortcodes)
@@ -41,7 +38,7 @@ This plugin is published under GPL2 open source license by [SWER Sviluppo siti i
 = Is this plugin supported? =
 
 We'll try our best to support it on the [support forum](http://wordpress.org/support/plugin/page2cat) but we can't assure response time.
-If you rely on this plugin for production websites and you can't have an answer please get in touch with our [helpdesk](http://swergroup.zendesk.com): open source plugins support starts from $5/hour, 24h turnaround response time (please note we are GMT+1). 
+If you rely on this plugin for production websites and you need answers ASAP please get in touch with our (paid) [helpdesk](http://swergroup.zendesk.com).
 
 = How can I modify my theme? =
 
@@ -54,11 +51,10 @@ You can find this and more info on the [official wiki](http://dev.swergroup.com/
 where category_ID is your category number and number_of_posts is a number higher than your category posts count.
 Again, you can find this and more info on the [official wiki](http://dev.swergroup.com/pages-and-posts-shortcodes/wiki/Home).
 
-
 == Screenshots ==
 
-1. [showsingle] input (edit page)
-2. [showsingle] output (shortcode rendered in host page)
+1. showsingle input (edit page)
+2. showsingle output (shortcode rendered in host page)
 
 == Changelog ==
 
