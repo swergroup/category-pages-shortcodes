@@ -104,8 +104,8 @@ if ( ! array_key_exists( 'swer-page2cat-core', $GLOBALS ) ) {
    elseif ( isset( $autoargs ) && is_array( $autoargs ) ) :
     $pagehead = get_pages( $autoargs );
     if ( isset( $pagehead[0]->ID ) ):
-      if ( $showheader === 'true' ) $output .= self::do_header( $pagehead[0]->post_title, '1', 'aptools-auto-header page2cat-auto-header' );
-      if ( $content === 'true' ) $output .= self::do_content( $pagehead[0]->post_content, 'aptools-auto-content page2cat-auto-content' );
+      if ( $showheader === 'true' ) $output .= self::do_header( $pagehead[0]->post_title, $header, $headerclass );
+      if ( $content === 'true' ) $output .= self::do_content( $pagehead[0]->post_content, $contentclass );
       if ( $wrapper !== 'false' ) $output = self::do_wrapper( $output, $wrapperclass );
     endif;
    endif;
@@ -165,7 +165,7 @@ if ( ! array_key_exists( 'swer-page2cat-core', $GLOBALS ) ) {
    foreach ( $others as $ex ):
      $ids[] = $ex->ID;
      $linked_ID = get_post_meta( $ex->ID, 'page2cat_archive_link', true );
-     if ( $post->ID != $ex->ID ) $exclude[] = $linked_ID;
+     if ( $post_ID != $ex->ID ) $exclude[] = $linked_ID;
    endforeach;
    $to_exclude = ( count( $exclude ) > 0 ) ? join( ',', $exclude ) : null;
    # error_log( $to_exclude );

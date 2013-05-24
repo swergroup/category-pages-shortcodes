@@ -59,8 +59,11 @@ Again, you can find this and more info on the [official wiki](http://dev.swergro
 == Changelog ==
 
 = 3.3.2 =
+* (24/05/2013) NEW WP 3.6 (beta3) support, dropped 3.4.x support
+* (24/05/2013) FIX options on [showauto]
 * (23/05/2013) NEW custom post type / taxonomy support
 * (23/05/2013) NEW post status support
+* (23/05/2013) FIX categories/pages dropdown select
 
 = 3.3.1 =
 * (22/05/2013) FIX activation/version issues
@@ -97,6 +100,9 @@ Again, you can find this and more info on the [official wiki](http://dev.swergro
 
 == Upgrade Notice ==
 
+= 3.3.2 = 
+Add WP 3.6 support, drop WP 3.4.x support.
+
 = 3.0.3 =
 CAUTION: This plugin requires WordPress 3.4.x, and will **break** your WP 2.5 setup.
 - Better descriptions in edit-page and edit-category forms
@@ -104,7 +110,6 @@ CAUTION: This plugin requires WordPress 3.4.x, and will **break** your WP 2.5 se
 
 = 3.0.2 = 
 CAUTION: This plugin requires WordPress 3.4.x, and will **break** your WP 2.5 setup.
-FIX showlist category query.
 
 = 3.0 =
 This plugin requires WordPress 3.4.x, and will **break** your WP 2.5 setup.

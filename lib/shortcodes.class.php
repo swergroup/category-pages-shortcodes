@@ -75,7 +75,7 @@ if ( ! array_key_exists( 'swer-page2cat-shortcodes', $GLOBALS ) )
   }
 
     
-  static function showauto(){
+  static function showauto( $atts ){
    global $cat;
    $query_args = array(
        'post_type' => 'page',
@@ -94,9 +94,22 @@ if ( ! array_key_exists( 'swer-page2cat-shortcodes', $GLOBALS ) )
       'wrapper' => 'false',
       'wrapperclass' => 'aptools-wrapper page2cat-wrapper',
     );
+   extract( shortcode_atts( $defaults, $atts ) );
+
+   $customs = array(
+      'showheader' => $showheader,
+      'header' => $header,
+      'headerclass' => $headerclass,
+      'content' => $content,
+      'contentclass' => $contentclass,
+      'wrapper' => $wrapper,
+      'wrapperclass' => $wrapperclass,
+    );
+
+   # error_log( json_encode( $customs ) );
 
    ob_start();
-   $output = self::shortcode_pages( $defaults, $query_args );
+   $output = self::shortcode_pages( $customs, $query_args );
    _e( $output );
    $clean = ob_get_clean();
    return $clean;
