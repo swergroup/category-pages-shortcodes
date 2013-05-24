@@ -25,8 +25,8 @@ if ( ! array_key_exists( 'swer-page2cat-shortcodes', $GLOBALS ) )
      )
     );
 
-   if ( $postid == $post->ID ) return;
-   if ( $pageid == $post->ID ) return;
+   if ( isset( $post ) && $postid == $post->ID ) return;
+   if ( isset( $post ) && $pageid == $post->ID ) return;
     # print_r( $atts); die();
    ob_start();
 
