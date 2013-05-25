@@ -3,8 +3,12 @@
 if ( ! array_key_exists( 'swer-page2cat-core', $GLOBALS ) ) { 
  class Page2Cat_Core {
 
-  static function do_excerpt( $content ){
-    return wp_trim_excerpt( $content );
+  static function do_excerpt( $post ){
+   if ( '' !== trim( $post->excerpt ) ):
+      return $post->excerpt;
+   else :
+      return wp_trim_excerpt( $post->content );
+   endif;
   }
 
 
@@ -35,7 +39,7 @@ if ( ! array_key_exists( 'swer-page2cat-core', $GLOBALS ) ) {
 
     $title = ( $headerlink === 'true' ) ? '<a href="'.get_permalink( $post->ID ).'">'.$post->post_title.'</a>' : $post->post_title; 
     $pre = ( $image === 'true' ) ? get_the_post_thumbnail( $post->ID, $size, array( 'class' => 'page2cat-list-icon' ) ) : null;
-    $post = ( $excerpt === 'true' ) ? '<span>' . self::do_excerpt( $post->post_content ) . '</span>' : null;
+    $post = ( $excerpt === 'true' ) ? '<span>' . self::do_excerpt( $post ) . '</span>' : null;
     $output = '<li> ' . $pre . ' ' . $title . ' ' . $post . ' </li>';
     return $output;
   }

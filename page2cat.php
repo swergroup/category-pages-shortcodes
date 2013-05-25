@@ -3,7 +3,7 @@
 Plugin Name: Page2Cat: Category Pages & Posts Shortcodes
 Plugin URI: http://wordpress.org/extend/plugins/page2cat/
 Description: Display posts/pages content (or lists of posts) with handy shortcodes, and map categories to pages directly in the admin area.
-Version: 3.3.2-b2
+Version: 3.3.2-beta3
 Author: SWERgroup
 Author URI: http://swergroup.com/
 License: GPL2
@@ -11,8 +11,8 @@ License: GPL2
 
 /*  
     SomeRight 2012+  Paolo Tresso / SWERgroup  (email : plugins@swergroup.com)
-    Rewrite of pixline's "Category Page" plugin, GPL2 (2007)
-    Plugin based on Empty Plugin Template 0.1.1.2 (http://1manfactory.com/ept)
+    Full (and not compatible) rewrite of "Category Page" WP plugin, GPL2 (2007) Pixline
+    Some code borrowed from Empty Plugin Template 0.1.1.2 (http://1manfactory.com/ept)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License, version 2, as 
@@ -31,7 +31,7 @@ License: GPL2
 
 define( 'SWER_PUGIN_NAME', 'Category Pages & Posts Shortcodes' );
 define( 'SWER_PLUGIN_DIRECTORY', 'page2cat' );
-define( 'SWER_CURRENT_VERSION', '3.3.2-b2' );
+define( 'SWER_CURRENT_VERSION', '3.3.2-beta3' );
 define( 'SWER_I18N_DOMAIN', 'page2cat' );
 #define( 'SWER_LOGPATH', str_replace( '\\', '/', WP_CONTENT_DIR ).'/swer-logs/' );
 
