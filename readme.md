@@ -15,34 +15,3 @@ Useful links:
 * [Build status on Travis CI](https://travis-ci.org/swergroup/category-pages-shortcodes)
 
 This plugin is published under GPL2 license by [SWERgroup](http://swergroup.com/sviluppo/siti-internet-torino/). 
-
-### Changelog
-
-#### 3.3.2
-
-* (24/05/2013) NEW WP 3.6 (beta3) support, dropped 3.4.x support
-* (24/05/2013) FIX options on [showauto]
-* (23/05/2013) NEW custom post type / taxonomy support
-* (23/05/2013) NEW post status support
-* (23/05/2013) FIX categories/pages dropdown select
-
-#### 3.3.1
-
-* (22/05/2013) FIX activation/version issues
-
-#### 3.2.1
-
-* (21/05/2013) FIX object caching issue (props arodeus)
-* (20/05/2013) FIX rendering bug
-* (10/04/2013) FIX do_shortcode on content (props Xmod08 + MRLR2)
-* (21/05/2013) NEW more/better CSS styling support
-* (21/04/2013) NEW online documentation & code examples
-* (20/04/2013) NEW admin sections / options
-* (02/02/2013) NEW initial test support
-
-#### 3.0.6
-
-* (11/11/2012) FIX Warning on admin Page area. 
-* (11/11/2012) FIX Better headers and descriptions
-* (11/11/2012) FIX [showauto] formatting and styles
-
