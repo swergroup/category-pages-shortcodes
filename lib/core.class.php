@@ -24,7 +24,7 @@ if ( ! array_key_exists( 'swer-page2cat-core', $GLOBALS ) ) {
   static function do_content( $text, $class = 'aptools-content page2cat-content' ){
     $copen = '<div class="'.$class.'">';
     $cclose = '</div>';
-    return $copen . do_shortcode( $text ) . $cclose;
+    return $copen . do_shortcode( apply_filters( 'the_content', wp_trim_excerpt( $text ) ) ) . $cclose;
   }
 
   static function do_wrapper( $content, $class = 'aptools-wrapper page2cat-wrapper' ){
