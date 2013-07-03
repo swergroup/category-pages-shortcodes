@@ -1,0 +1,33 @@
+{
+  "name": "Page2Cat",
+  "version": "3.3.0",
+  "description": "Page2Cat - Category, pages and posts shortcodes WP plugin",
+  "main": "Gruntfile.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "grunt": "~0.4.1",
+    "grunt-phpcs": "~0.1.1",
+    "grunt-shell": "~0.2.2",
+    "grunt-phpdocumentor": "~0.1.0",
+    "grunt-phplint": "0.0.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com:swergroup/category-pages-shortcodes.git"
+  },
+  "keywords": [
+    "wp",
+    "plugin",
+    ""
+  ],
+  "author": "pixline",
+  "license": "GPL2",
+  "gitHead": "915d78d01d8a53c9c959cd7d19e2731d2a779123",
+  "readmeFilename": "readme.md"
+}
