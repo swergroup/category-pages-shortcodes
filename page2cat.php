@@ -10,28 +10,28 @@ License: GPL2
 */
 
 /*  
-    SomeRight 2012+  Paolo Tresso / SWERgroup  (email : plugins@swergroup.com)
-    Full (and not compatible) rewrite of "Category Page" WP plugin, GPL2 (2007) Pixline
-    Some code borrowed from Empty Plugin Template 0.1.1.2 (http://1manfactory.com/ept)
+SomeRight 2012+  Paolo Tresso / SWERgroup  (email : plugins@swergroup.com)
+Full (and not compatible) rewrite of "Category Page" WP plugin, GPL2 (2007) Pixline
+Some code borrowed from Empty Plugin Template 0.1.1.2 (http://1manfactory.com/ept)
 
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License, version 2, as 
-    published by the Free Software Foundation.
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License, version 2, as 
+published by the Free Software Foundation.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with this program; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 ?><?php
 
-define( 'SWER_PUGIN_NAME', 'Category Pages & Posts Shortcodes' );
+define( 'SWER_PUGIN_NAME', 'Page2Cat: Category Pages & Posts Shortcodes' );
 define( 'SWER_PLUGIN_DIRECTORY', 'page2cat' );
-define( 'SWER_CURRENT_VERSION', '3.3.2-beta3' );
+define( 'SWER_CURRENT_VERSION', '3.3.2-beta4' );
 define( 'SWER_I18N_DOMAIN', 'page2cat' );
 #define( 'SWER_LOGPATH', str_replace( '\\', '/', WP_CONTENT_DIR ).'/swer-logs/' );
 
@@ -64,26 +64,25 @@ register_uninstall_hook( __FILE__, 'page2cat_uninstall' );
 
 // activating the default values
 function page2cat_activate() {
- global $wp_version;
- if ( version_compare( $wp_version, '3.5', '<=' ) ) {
-     deactivate_plugins( __FILE__ );
-     wp_die( __( 'Page2cat requires WordPress 3.5 or newer (yours: '.$wp_version.')', 'page2cat' ), __( 'Please upgrade your Wordpress.', 'page2cat' ) );
- }
+	global $wp_version;
+	if ( version_compare( $wp_version, '3.5', '<=' ) ) {
+		deactivate_plugins( __FILE__ );
+		wp_die( __( 'Page2cat requires WordPress 3.5 or newer (yours: '.$wp_version.')', 'page2cat' ), __( 'Please upgrade your Wordpress.', 'page2cat' ) );
+	}
 
- delete_option( 'pixline_page2cat_version' );
- delete_option( 'p2c_use_empty' );
- delete_option( 'p2c_show_used_pages' );
- delete_option( 'p2c_catlist_limit' );
- delete_option( 'p2c_catlist_title' );
- delete_option( 'p2c_excerpt_settings' );
- delete_option( 'p2c_post_settings' );
- delete_option( 'p2c_excerpt_length' );
- delete_option( 'p2c_use_thumbnail' );
- delete_option( 'p2c_img_class' );
- delete_option( 'p2c_title_class' );
- delete_option( 'p2c_thumbnail_size' );
- delete_option( 'p2c_use_img' );
-
+	delete_option( 'pixline_page2cat_version' );
+	delete_option( 'p2c_use_empty' );
+	delete_option( 'p2c_show_used_pages' );
+	delete_option( 'p2c_catlist_limit' );
+	delete_option( 'p2c_catlist_title' );
+	delete_option( 'p2c_excerpt_settings' );
+	delete_option( 'p2c_post_settings' );
+	delete_option( 'p2c_excerpt_length' );
+	delete_option( 'p2c_use_thumbnail' );
+	delete_option( 'p2c_img_class' );
+	delete_option( 'p2c_title_class' );
+	delete_option( 'p2c_thumbnail_size' );
+	delete_option( 'p2c_use_img' );
 }
 
 function page2cat_deactivate() {
@@ -93,6 +92,7 @@ function page2cat_deactivate() {
 // uninstalling
 function page2cat_uninstall() {
 	delete_option( 'page2cat_options' );
-	if (function_exists( 'page2cat_deleteLogFolder' ) ) page2cat_deleteLogFolder();
+	if ( function_exists( 'page2cat_deleteLogFolder' ) )
+		page2cat_deleteLogFolder();
 }
 
