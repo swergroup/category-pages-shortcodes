@@ -19,7 +19,7 @@
     "vendor-dir": "vendor"
   },
   "require"     : {
-    "wp-cli/wp-cli": ">=0.11",
+    "wp-cli/wp-cli": ">=0.11"
 },
   "require-dev" : {
     "phpmd/phpmd"              : "1.4.*"
