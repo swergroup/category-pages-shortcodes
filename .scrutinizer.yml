@@ -1,6 +1,9 @@
 filter:
     excluded_paths: [tests/*, assets/*]
 
+before_commands:
+    - "composer install --prefer-source"
+    
 tools:
     php_cpd: true
     php_pdepend:
