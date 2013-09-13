@@ -3,6 +3,7 @@ filter:
 
 before_commands:
     - "composer install --prefer-source"
+    - "wp --info"
     
 tools:
     php_cpd: true
