@@ -18,7 +18,7 @@ tools:
                     white_space:
                         disallow_tab_indent_sniff:  true
                         disallow_space_indent_sniff:  true
-                wordpress:
+                WordPress:
                     WhiteSpace:
                         WordPress_Sniffs_WhiteSpace_PhpIndentSniff: false
                         WordPress.WhiteSpace.ControlStructureSpacing: false
