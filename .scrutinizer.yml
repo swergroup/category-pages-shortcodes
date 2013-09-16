@@ -17,8 +17,9 @@ tools:
                 generic:
                     white_space:
                         disallow_tab_indent_sniff:  false
-                        disallow_space_indent_sniff:  false
+                        disallow_space_indent_sniff:  true
     php_loc: true
+    php_cs_fixer: true
     php_mess_detector: true
     php_pdepend: true
     php_analyzer: true
