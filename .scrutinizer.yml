@@ -13,11 +13,11 @@ tools:
             tab_width:  4
             encoding:   utf8
             standard:   WordPress
-        sniffs:
-            generic:
-                white_space:
-                    disallow_tab_indent_sniff:  true
-                    disallow_space_indent_sniff:  true                    
+            sniffs:
+                generic:
+                    white_space:
+                        disallow_tab_indent_sniff:  true
+                        disallow_space_indent_sniff:  true                    
     php_loc: true
     php_mess_detector: true
     php_pdepend: true
