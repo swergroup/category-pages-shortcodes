@@ -1,5 +1,5 @@
 filter:
-    excluded_paths: [tests/*, assets/*]
+    paths: [*, lib/*]
 
 tools:
     php_cpd: true
@@ -8,16 +8,11 @@ tools:
     php_code_coverage: false
     php_code_sniffer:
         filter:
-            excluded_paths: [tests/*, assets/*]
+            paths: [*, lib/*]
         config:
             tab_width:  4
             encoding:   utf8
             standard:   WordPress
-            sniffs:
-                generic:
-                    white_space:
-                        disallow_tab_indent_sniff:  false
-                        disallow_space_indent_sniff:  true
     php_loc: true
     php_cs_fixer: true
     php_mess_detector: true
