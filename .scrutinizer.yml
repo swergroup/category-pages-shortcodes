@@ -8,8 +8,13 @@ before_commands:
 tools:
     php_cpd: true
     php_pdepend:
-        excluded_dirs: [tests]
-    php_code_sniffer: true
+        excluded_dirs: [tests/*, assets/*]
+    php_code_coverage: false
+    php_code_sniffer:
+        filter:
+            excluded_paths: [tests/*, assets/*]
+        config:
+            standard: WordPress
     php_loc: true
     php_mess_detector: true
     php_pdepend: true
