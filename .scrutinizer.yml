@@ -16,12 +16,8 @@ tools:
             sniffs:
                 generic:
                     white_space:
-                        disallow_tab_indent_sniff:  true
-                        disallow_space_indent_sniff:  true
-                WordPress:
-                    WhiteSpace:
-                        WordPress_Sniffs_WhiteSpace_PhpIndentSniff: false
-                        WordPress.WhiteSpace.ControlStructureSpacing: false
+                        disallow_tab_indent_sniff:  false
+                        disallow_space_indent_sniff:  false
     php_loc: true
     php_mess_detector: true
     php_pdepend: true
