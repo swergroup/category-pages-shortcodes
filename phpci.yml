@@ -16,7 +16,7 @@ test:
         allow_failures: false
     php_loc:
         allow_failures: true
-    phpunit:
+    php_unit:
         allow_failures: false
 
 success:
