@@ -5,9 +5,6 @@ build_settings:
         - "vendor"
 
 setup:
-    shell:
-        command: "npm install"
-    grunt:
 
 test:
     php_mess_detector:
@@ -20,7 +17,7 @@ test:
     php_loc:
         allow_failures: true
     phpunit:
-        config: "phpunit.xml"
+        allow_failures: false
 
 success:
     package_build:
