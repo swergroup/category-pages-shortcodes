@@ -27,12 +27,11 @@ if ( ! array_key_exists( 'swer-page2cat-shortcodes', $GLOBALS ) )
 
 			if ( isset( $post ) && $postid == $post->ID ) return;
 			if ( isset( $post ) && $pageid == $post->ID ) return;
-		# print_r( $atts); die();
 			ob_start();
 
-			if ( !empty( $postid ) && empty( $pageid ) ) :
+			if ( ! empty( $postid ) && empty( $pageid ) ) :
 				$output = self::shortcode_posts( $atts );
-			elseif ( !empty( $pageid ) && empty( $postid ) ) :
+			elseif ( ! empty( $pageid ) && empty( $postid ) ) :
 				$output = self::shortcode_pages( $atts );
 			else :
 				$output = false;
@@ -67,9 +66,9 @@ if ( ! array_key_exists( 'swer-page2cat-shortcodes', $GLOBALS ) )
 
 			if ( isset( $catid ) ) :
 				ob_start();
-			$output = self::shortcode_list( $atts );
-			_e( $output );
-			$clean = ob_get_clean();
+				$output = self::shortcode_list( $atts );
+				_e( $output );
+				$clean = ob_get_clean();
 			endif;
 			return $clean;
 		}

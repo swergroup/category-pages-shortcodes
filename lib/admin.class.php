@@ -5,7 +5,7 @@ if ( ! array_key_exists( 'swer-page2cat-admin', $GLOBALS ) )
 	class Page2CatAdmin extends Page2Cat_Core{
 
 		static function add_meta_boxes(){
-			if ( !defined( 'SWER_PHPUNIT' ) )
+			if ( ! defined( 'SWER_PHPUNIT' ) )
 				add_meta_box(
 					'page2cat_archive_link', 
 					'Category Pages & Posts', 
@@ -95,17 +95,14 @@ if ( ! array_key_exists( 'swer-page2cat-admin', $GLOBALS ) )
 			if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) 
 				return;
 
-			if (
-				! isset($_POST[ 'page2cat-nonce' ]) || 
-				!wp_verify_nonce( $_POST[ 'page2cat-nonce' ], plugin_basename( __FILE__ ) )
-				)
+			if ( ! isset($_POST[ 'page2cat-nonce' ]) || ! wp_verify_nonce( $_POST[ 'page2cat-nonce' ], plugin_basename( __FILE__ ) ) )
 				return;
 
 			if ( 'page' == $_POST['post_type'] ){
-				if ( !current_user_can( 'edit_page', $post_id ) )
+				if ( ! current_user_can( 'edit_page', $post_id ) )
 					return;
 			} else {
-				if ( !current_user_can( 'edit_post', $post_id ) )
+				if ( ! current_user_can( 'edit_post', $post_id ) )
 					return;
 			}
 

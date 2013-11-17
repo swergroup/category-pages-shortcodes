@@ -48,7 +48,7 @@ include( P2C_PATH . '/lib/shortcodes.class.php' );
 function page2cat_set_lang_file() {
 	# set the language file
 	$currentLocale = get_locale();
-	if ( !empty( $currentLocale ) ) {
+	if ( ! empty( $currentLocale ) ) {
 		$moFile = dirname( __FILE__ ) . '/lang/' . $currentLocale . '.mo';
 		if ( @file_exists( $moFile ) && is_readable( $moFile ) ) {
 			load_textdomain( SWER_I18N_DOMAIN, $moFile );
