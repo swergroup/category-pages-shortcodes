@@ -1,2 +1,4 @@
 .svn
 .tx
+.tm_properties
+node_modules
