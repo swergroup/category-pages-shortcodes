@@ -1,0 +1,25 @@
+build_settings:
+    ignore:
+        - "assets"
+        - "tests"
+        - "vendor"
+
+setup:
+
+test:
+    php_mess_detector:
+        allow_failures: true
+    php_code_sniffer:
+        standard: "WordPress"
+        allow_failures: false
+    php_cpd:
+        allow_failures: false
+    php_loc:
+        allow_failures: true
+
+success:
+    package_build:
+        directory: "/home/buildswer/builds/"
+        filename: "category-pages-shortcodes-latest"
+        format: zip
+
